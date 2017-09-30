@@ -18,16 +18,15 @@
 
 *******************************************************************************/
 
-var express = require('express');
-var passport   = require('passport');
-var session    = require('express-session');
-var bodyParser = require('body-parser');
+var express        = require('express');
+var exphbs         = require('express-handlebars')
+var passport       = require('passport');
+var session        = require('express-session');
+var bodyParser     = require('body-parser');
 var methodOverride = require('method-override');
 
 var app = express();
 var port = process.env.PORT || 3100;
-
-var db = require('./models');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -37,23 +36,22 @@ app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 app.use(session({ secret: 'keyboard cat',resave: true, saveUninitialized:true}));
 app.use(passport.initialize());
 app.use(passport.session());
-
 app.use(express.static("public"));
 
-// require('./routes/api-routes.js)(app);
-// require('./routes/html-routes.js')(app);
+app.set('views', './views')
+app.engine('hbs', exphbs({
+    defaultLayout: "main",
+    extname: '.hbs'
+}));
 
-var express = require('express');
-var app = express();
+app.set('view engine', '.hbs');
 
+var db = require('./models');
+require('./config/passport/passport.js')(passport, db.User);
+var authRoute = require('./routes/auth.js')(app,passport);
 
-app.get('/', function(req, res) {
-    res.send('Welcome to Passport with Sequelize');
-});
-
-// Change force to true if you'd like to reset the database for any reason
 db.sequelize.sync({ force: false }).then(function() {
-      app.listen(PORT, function() {
-        console.log("App listening on PORT " + PORT);
-      });
+    app.listen(port, function() {
+        console.log("App listening on PORT " + port);
     });
+});

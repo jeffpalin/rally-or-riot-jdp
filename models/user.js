@@ -18,8 +18,6 @@
 
 *******************************************************************************/
 
-var bcrypt = require("bcrypt-nodejs");
-
 module.exports = function(sequelize, DataTypes) {
   var User = sequelize.define("User", {
     username: {
@@ -30,8 +28,10 @@ module.exports = function(sequelize, DataTypes) {
         }
     },
     email: {
-        type: DataTypes.STRING,
-        isEmail: true
+         type: DataTypes.STRING,
+         validate: {
+             isEmail: true
+         }
     },
     password: {
         type: DataTypes.STRING,
@@ -44,16 +44,6 @@ module.exports = function(sequelize, DataTypes) {
     gender: {
         type: DataTypes.STRING,
         allowNull: false
-    }
-}, {
-    freezeTableName: true
-    instanceMethods: {
-        generateHash: function(password) {
-            return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
-        },
-        validPassword: function(password) {
-            return bcrypt.compareSync(password, this.password);
-        },
     }
 });
   return User;
