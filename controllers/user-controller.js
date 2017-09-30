@@ -15,5 +15,5 @@ exports.signout = function(req, res) {
 }
 
 exports.explore = function(req, res) {
-    res.render('explore');
+    res.render('explore', {user: req.user});
 }

@@ -2,18 +2,32 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
-		<link rel="stylesheet" href="/assets/css/style.css" type="text/css" />
-		<title>Burger Time!</title>
-	</head>
-	<body>
-		{{{ body }}}
-		<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
-		<script>
-			$(document).ready(function() {
-		    	$('select').material_select();
-			});
-		</script>
-	</body>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+	<link rel="stylesheet" href="/assets/css/style.css" type="text/css" />
+	<title>Burger Time!</title>
+</head>
+<body>
+	<nav>
+		<div class="nav-wrapper">
+			<a href="#" class="brand-logo">Rally or Riot</a>
+			<ul id="nav-mobile" class="right hide-on-med-and-down">
+				{{#if user}}
+			      Hello, {{user.username}}
+			    {{^}}
+					<li><a href="/signup">Sign Up</a></li>
+					<li><a href="/signin">Sign In</a></li>
+			    {{/if}}
+			</ul>
+		</div>
+	</nav>
+
+	{{{ body }}}
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+	<script>
+	$(document).ready(function() {
+		$('select').material_select();
+	});
+	</script>
+</body>
 </html>
