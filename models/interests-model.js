@@ -14,7 +14,7 @@
         |      |     - Nick Saponaro
         |      |     - Rowinn Dionisio
 
-        FILE: beacon-model.js - Beacon table creation model
+        FILE: interests-model.js - Beacon table creation model
 
 *******************************************************************************/
 
