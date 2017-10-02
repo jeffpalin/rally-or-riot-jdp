@@ -1,12 +1,14 @@
-var userController = require('../controllers/user-controller.js');
+var mainController = require('../controllers/main-controller.js');
 
 module.exports = function(app, passport) {
 
-    app.get('/signup', userController.signup);
-    app.get('/signin', userController.signin);
-    app.get('/signout', userController.signout);
-    app.get('/explore', isSignedIn, userController.explore);
-    
+    app.get('/signup', mainController.signup);
+    app.get('/signin', mainController.signin);
+    app.get('/signout', mainController.signout);
+    app.get('/explore', isSignedIn, mainController.explore);
+    app.get('/', mainController.landing);
+    app.get('/profile/:username?', isSignedIn, mainController.profile);
+
     app.post('/signup', passport.authenticate('local-signup', {
         successRedirect: '/explore',
         failureRedirect: '/signup'
