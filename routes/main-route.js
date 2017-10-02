@@ -6,7 +6,8 @@ module.exports = function(app, passport) {
     app.get('/signin', mainController.signin);
     app.get('/signout', mainController.signout);
     app.get('/explore', isSignedIn, mainController.explore);
-    app.get('/', isSignedIn, mainController.landing);
+    app.get('/', mainController.landing);
+    app.get('/profile/:username?', isSignedIn, mainController.profile);
 
     app.post('/signup', passport.authenticate('local-signup', {
         successRedirect: '/explore',
