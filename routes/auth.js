@@ -6,7 +6,7 @@ module.exports = function(app, passport) {
     app.get('/signin', userController.signin);
     app.get('/signout', userController.signout);
     app.get('/explore', isSignedIn, userController.explore);
-
+    
     app.post('/signup', passport.authenticate('local-signup', {
         successRedirect: '/explore',
         failureRedirect: '/signup'
