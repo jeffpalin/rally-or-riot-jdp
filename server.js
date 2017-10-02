@@ -48,13 +48,8 @@ app.set('view engine', '.hbs');
 
 var db = require('./models');
 require('./config/passport/passport.js')(passport, db.User);
-<<<<<<< HEAD
-var authRoute = require('./routes/auth.js')(app,passport);
-var profileRoute = require('./routes/profile-routes.js')(app, passport);
-=======
 
 var mainRoute = require('./routes/main-route.js')(app,passport);
->>>>>>> 157c7b8dbd4b8b5b0ec3e69e0aeba5062b168e68
 
 db.sequelize.sync({ force: false }).then(function() {
     app.listen(port, function() {
