@@ -14,20 +14,20 @@
         |      |     - Nick Saponaro
         |      |     - Rowinn Dionisio
 
-        FILE: profile-model.js - Beacon table creation model
+        FILE: beacon-model.js - Beacon table creation model
 
 *******************************************************************************/
 
 module.exports = function(sequelize, DataTypes) {
-    var Profile = sequelize.define("Profile", {
+    var Interests = sequelize.define("Interests", {
         user_id: {
             type: DataTypes.INTEGER,
             allowNull: false
         },
-        bio: {
+        interests: {
             type: DataTypes.STRING,
             allowNull: true
         }
     });
-    return Profile;
+    return Beacon;
 };
