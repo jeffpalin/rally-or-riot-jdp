@@ -14,6 +14,20 @@
         |      |     - Nick Saponaro
         |      |     - Rowinn Dionisio
 
-        FILE: rr-model.js - Default/Fallback model for Rally or Riot project
+        FILE: profile-model.js - Beacon table creation model
 
 *******************************************************************************/
+
+module.exports = function(sequelize, DataTypes) {
+    var Profile = sequelize.define("Profile", {
+        user_id: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
+        bio: {
+            type: DataTypes.STRING,
+            allowNull: true
+        }
+    });
+    return Profile;
+};
