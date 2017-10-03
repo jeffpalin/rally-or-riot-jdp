@@ -9,8 +9,7 @@
             </div>
             <div class="col s12">
                 <!-- Dropdown Trigger -->
-                <a class='dropdown-button btn' data-beloworigin="true" href='#' data-activates='categories'><i class="material-icons">filter_list</i>Category</a>
-
+                <a class='dropdown-button btn grey' data-beloworigin="true" href='#' data-activates='categories'>Category</a>
                 <ul id='categories' class='dropdown-content'>
                     <li><a href="#!">one</a></li>
                     <li><a href="#!">two</a></li>
@@ -19,7 +18,7 @@
                     <li><a href="#!"><i class="material-icons">cloud</i>five</a></li>
                 </ul>
 
-                <a id="beaconCreate" class="btn-floating btn-medium waves-effect waves-light"><i class="material-icons">settings_remote</i></a>
+                <a id="beaconCreate" class="btn-floating btn-medium waves-effect waves-light grey"><i class="material-icons">settings_remote</i></a>
             </div>
         </div>
     </div>
@@ -75,13 +74,13 @@
                     <label for="female">Allow Women</label>
                 </div>
             </div> -->
-            <button class="btn" id="beaconSubmit" type="submit">Create</button>
+            <button class="btn waves-effect waves-light grey" id="beaconSubmit" type="submit">Create</button>
         </form>
     </div>
 
     <div class="beacons">
         <div class="row">
-            <div class="col s12 m4">
+            <div class="col s12 m7 l7">
                 {{#each beacon}}
                     <div class="card">
                         <div class="card-content">
@@ -95,11 +94,14 @@
                     </div>
                 {{/each}}
             </div>
-            <div class="col s12 m4 red">
+
+            {{!-- <div class="col s12 m4 red">
                 COLUMN 2
-            </div>
-            <div class="col s12 m4 blue">
-                COLUMN 3
+            </div> --}}
+
+            <div class="col s12 m5 l5 blue">
+                GEO-MAP<BR>
+                WILL GO HERE
             </div>
         </div>
     </div>
