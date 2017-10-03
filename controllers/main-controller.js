@@ -35,9 +35,31 @@ exports.profile = function(req, res) {
         }
     }).then(function(result) {
         user.email = result.email;
-        user.profile = result.username; //verify it exists
         res.render('profile', {user: user});
     }).catch(function(err) {
         res.render(err)
     });
 };
+
+exports.beacon = function(req, res) {
+    db.Beacon.create({
+        user_id: req.user.id,
+        name: req.body.name,
+        activity: req.body.activity,
+        category: req.body.category,
+        population: 1
+        // ageMin: req.body.ageMin,
+        // ageMax: req.body.ageMax,
+        // gender: req.body.gender
+        // lat: req.body.lat,
+        // lng: req.body.lng
+    }).then(function(results) {
+        res.send(results);
+    });
+
+// exports.beaconList = function(req, res) {
+//     db.Beacon.findAll({}).then(function(result) {
+//         res.json(result);
+//     });
+// }
+}

@@ -1,30 +1,101 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
-	<link rel="stylesheet" href="/assets/css/style.css" type="text/css" />
+
+	<link rel="stylesheet" href="/assets/css/rr-style.css" type="text/css" />
+	<link rel="stylesheet" href="/assets/css/nouislider.min.css" type="text/text/css" />
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
-	<title>Rally or Riot</title>
+
+	<title>Rally or Riot!</title>
+
+	<link rel="stylesheet" href="/assets/css/style.css" type="text/css" />
+
 </head>
+
 <body>
-	<nav>
-		<div class="nav-wrapper">
-			<a href="#" class="brand-logo">Rally or Riot</a>
-			<ul id="nav-mobile" class="right hide-on-med-and-down">
+
+{{!-- NAVIGATION START --}}
+
+	<nav role="navigation">
+		<div class="nav-wrapper container">
+			<a id="logo-container" href="#" class="brand-logo">Rally or Riot</a>
+			<ul class="right hide-on-med-and-down">
 				{{#if user}}
-			      	<li>Hello, {{user.username}}</li>
-				  	<li><a href="/signout">Sign Out</a></li>
-			    {{^}}
-					<li><a href="/signup">Sign Up</a></li>
-					<li><a href="/signin">Sign In</a></li>
-			    {{/if}}
+				<li>Hello, {{user.username}}</li>
+				<li><a href="/signout">Sign Out</a></li>
+				{{^}}
+				<li><a href="/signup">Sign Up</a></li>
+				<li><a href="/signin">Sign In</a></li>
+				{{/if}}
 			</ul>
+
+			<ul id="nav-mobile" class="side-nav">
+				{{#if user}}
+				<li>Hello, {{user.username}}</li>
+				<li><a href="/signout">Sign Out</a></li>
+				{{^}}
+				<li><a href="/signup">Sign Up</a></li>
+				<li><a href="/signin">Sign In</a></li>
+				{{/if}} </ul>
+			<a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+
 		</div>
 	</nav>
 
+{{!-- NAVIGATION END - WITH MOBILE RESPONSIVE COLLAPSIBLE BURGER MENU --}}
+
+
 	{{{ body }}}
 
+
+{{!-- FOOTER BELOW  --}}
+
+	<footer class="page-footer grey darken-4">
+		<div class="container">
+			<div class="row">
+				<div class="col l6 s12">
+					<h5 class="white-text">Lorem Ipsum Dolor</h5>
+					<p class="grey-text text-lighten-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ac diam ac enim cursus venenatis a quis dolor. Ut venenatis cursus leo sit amet dictum. Proin euismod gravida ipsum. Aliquam dapibus sapien vitae orci efficitur, in laoreet ipsum facilisis. Praesent in velit vel mi egestas luctus id sed tellus. Curabitur mattis, diam quis posuere imperdiet, felis lacus volutpat odio, sit amet vulputate turpis ante convallis velit. Duis pellentesque enim eu cursus vestibulum.</p>
+				</div>
+				<div class="col l4 offset-l2 s12">
+					<h5 class="white-text">Connect With Us</h5>
+					<ul>
+						<li><a class="grey-text text-lighten-3" href="#!">Facebook</a></li>
+						<li><a class="grey-text text-lighten-3" href="#!">Twitter</a></li>
+						<li><a class="grey-text text-lighten-3" href="#!">Instagram</a></li>
+						<li><a class="grey-text text-lighten-3" href="#!">Snapchat</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="footer-copyright">
+			<div class="container">
+				© 2017 Copyright Text
+				{{!-- <a class="grey-text text-lighten-4 right" href="#!">More Links</a> --}}
+			</div>
+		</div>
+	</footer>
+
+{{!-- END FOOTER --}}
+<script>
+	(function ($) {
+		$(function () {
+
+			$('.button-collapse').sideNav();
+
+		}); // end of document ready
+	})(jQuery); // end of jQuery name space
+
+</script>
 </body>
+
+
+
+
 </html>
