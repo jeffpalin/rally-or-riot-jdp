@@ -81,8 +81,19 @@
 
     <div class="beacons">
         <div class="row">
-            <div class="col s12 m4 grey">
-                COLUMN 1
+            <div class="col s12 m4">
+                {{#each beacon}}
+                <div class="card">
+                        <div class="card-content">
+                            <span class="card-title">{{this.name}}</span>
+                            <p>{{this.activity}}</p>
+                        </div>
+                        <div class="card-action">
+                            <a href="#">Rally</a>
+                            <a href="#">Riot</a>
+                        </div>
+                    </div>
+                {{/each}}
             </div>
             <div class="col s12 m4 red">
                 COLUMN 2
@@ -99,7 +110,7 @@
     $('#beaconCreate').on('click', function(event){
         $('#beaconForm').toggle(400);
     });
-    $(document).ready(function() {
+    $('document').ready(function() {
         $('select').material_select();
     });
 </script>
