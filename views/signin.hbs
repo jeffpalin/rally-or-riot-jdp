@@ -1,17 +1,34 @@
-<form id="signin" name="signin" method="post" action="signin">
-    <label for="email">Email Address</label>
-    <input class="text" name="email" type="text" />
+<div class="container">
+    <div class="row">
 
-    <label for="password">Password</label>
-    <input name="password" type="password" />
+        <div class="col s12 m1 l2">
+            {{!--EMPTY CONTAINER--}}
+        </div>
 
-    <input class="btn" type="submit" value="Sign In" />
-</form>
+        <div class="col s12 m10 l8">
+            <p>
+                <form id="signin" name="signin" method="post" action="signin">
+                    <label for="email">Email Address</label>
+                    <input class="text" name="email" type="text" />
 
+                    <label for="password">Password</label>
+                    <input name="password" type="password" />
 
-	<script>
-		$(document).ready(function() {
-			$('select').material_select();
-		});
-	</script>
+                    <input class="btn waves-effect waves-light grey" type="submit" value="Sign In" />
+                </form>
+            </p>
+        </div>
 
+        <div class="col s12 m1 l2">
+            {{!-- EMPTY CONTAINER --}}
+        </div>
+
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('select').material_select();
+    });
+
+</script>
