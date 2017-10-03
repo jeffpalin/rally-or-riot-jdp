@@ -18,21 +18,17 @@
 
 *******************************************************************************/
 
-
 nav {
       background: linear-gradient(225deg, #e14b31, #2cd1df);
       background-size: 300% 300%;
       box-sizing: border-box;
       display: table;
-      /* height: 100vh; */
       margin: 0;
-      /* position: relative; */
-      /* width: 100vw; */
       -webkit-animation: Rainbow 5s ease infinite;
       -moz-animation: Rainbow 5s ease infinite;
       animation: Rainbow 5s ease infinite;
     }
-    
+
     @-webkit-keyframes Rainbow {
       0% {
         background-position: 94% 0%; }
@@ -41,6 +37,16 @@ nav {
       100% {
         background-position: 94% 0%; } }
 
+.explore-bar p{
+    padding: 0;
+    margin: 0;
+}
 
+.explore-bar {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
 
-
+.beacons {
+    margin-top: 1rem;
+}

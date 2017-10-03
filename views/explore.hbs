@@ -1,73 +1,48 @@
-
-<body>
-
-    <div class="grey lighten-3">
-        <div class="container explore-bar">
-            <div class="row">
-                <div class="col s12"><span class="flow-text">
-                    <p>
+<div class="grey lighten-3">
+    <div class="container explore-bar">
+        <div class="row">
+            <div class="col s12"><span class="flow-text">
+                <p>
                     <h5>Welcome Back, {{user.username}}!</h5>
                     <h6>Explore Your Next Rally or Riot</h6></span>
-                    </p>
+                </p>
+            </div>
+            <div class="col s12">
+                <!-- Dropdown Trigger -->
+                <a class='dropdown-button btn' data-beloworigin="true" href='#' data-activates='categories'><i class="material-icons">filter_list</i>Category</a>
+
+                <ul id='categories' class='dropdown-content'>
+                    <li><a href="#!">one</a></li>
+                    <li><a href="#!">two</a></li>
+                    <li><a href="#!">three</a></li>
+                    <li><a href="#!"><i class="material-icons">view_module</i>four</a></li>
+                    <li><a href="#!"><i class="material-icons">cloud</i>five</a></li>
+                </ul>
+
+                <a id="beaconCreate" class="btn-floating btn-medium waves-effect waves-light"><i class="material-icons">settings_remote</i></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div id="beaconForm" style="display:none">
+        <form>
+            <div class="row">
+                <div class="input-field col s6">
+                    <input placeholder="Enter a creative title" id="name" type="text" class="validate">
+                    <label for="name">Beacon Name</label>
                 </div>
 
-                    <!-- Dropdown Trigger -->
-                    <a class='dropdown-button btn' data-beloworigin="true" href='#' data-activates='dropdown1'><i class="material-icons">filter_list</i>Category</a>
-
-                    <!-- Dropdown Structure -->
-                    <ul id='dropdown1' class='dropdown-content'>
-                        <li><a href="#!">one</a></li>
-                        <li><a href="#!">two</a></li>
-                        <li><a href="#!">three</a></li>
-                        <li><a href="#!"><i class="material-icons">view_module</i>four</a></li>
-                        <li><a href="#!"><i class="material-icons">cloud</i>five</a></li>
-                    </ul>
-        
-            </div>
-        </div>
-    </div>
-
-    <div class="container">
-
-        <div class="row">
-
-        <div class="col s12 m4 grey">
-            COLUMN 1
-        </div>
-        <div class="col s12 m4 red">
-            COLUMN 2
-        </div>
-        <div class="col s12 m4 blue">
-            COLUMN 3
-        </div>
-
-        </div>
-
-    </div>
-    
-</body>
-
-<h2>Explore</h2>
-<h5>Hurray! {{user.username}} you are logged in.</h5>
-
-
-<div id="beaconForm" style="display:none">
-    <form>
-        <div class="row">
-            <div class="input-field col s6">
-                <input placeholder="Enter a creative title" id="name" type="text" class="validate">
-                <label for="name">Beacon Name</label>
+                <div class="input-field col s6">
+                    <input placeholder="What are you doing here?" id="activity" type="text" class="validate">
+                    <label for="activity">Activity</label>
+                </div>
             </div>
 
-            <div class="input-field col s6">
-                <input placeholder="What are you doing here?" id="activity" type="text" class="validate">
-                <label for="activity">Activity</label>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="input-field col s6">
-                <select id="category" name="category">
+            <div class="row">
+                <div class="input-field col s6">
+                    <select id="category" name="category">
                         <option data-icon="images/sample-1.jpg" class="circle" value="concert">Concerts</option>
                         <option data-icon="images/sample-1.jpg" class="circle" value="exercise">Exercising</option>
                         <option data-icon="images/sample-1.jpg" class="circle" value="food">Eating</option>
@@ -77,42 +52,54 @@
                         <option data-icon="images/sample-1.jpg" class="circle" value="study">Studying</option>
                         <option data-icon="images/sample-1.jpg" class="circle" value="uncategorized" selected>Uncategorized</option>
                         <option data-icon="images/sample-1.jpg" class="circle" value="yardsale">Yard Sale</option>
-                </select>
-                <label for="category">Category</label>
+                    </select>
+                    <label for="category">Category</label>
+                </div>
+
+                <!-- TODO: Beacon Tags -->
+                <div class="input-field col s6">
+                    <input placeholder="Yoga, Movies, Tailgating" id="tags" type="text" class="validate">
+                    <label for="tags">Tags (seperate by comma)</label>
+                </div>
             </div>
 
-            <!-- TODO: Beacon Tags -->
-            <div class="input-field col s6">
-                <input placeholder="Yoga, Movies, Tailgating" id="tags" type="text" class="validate">
-                <label for="tags">Tags (seperate by comma)</label>
+            <!-- TODO: Beacon Demographics <div class="row">
+                <div class="input-field col s6">
+                    <div id="ages"></div>
+                    <label for="ages">Age Group</label>
+                </div>
+                <div class="input-field col s6">
+                    <input type="checkbox" class="filled-in" id="male" value="male"/>
+                    <label for="male">Allow Men</label>
+                    <input type="checkbox" class="filled-in" id="female" value="female"/>
+                    <label for="female">Allow Women</label>
+                </div>
+            </div> -->
+            <button class="btn" id="beaconSubmit" type="submit">Create</button>
+        </form>
+    </div>
+
+    <div class="beacons">
+        <div class="row">
+            <div class="col s12 m4 grey">
+                COLUMN 1
+            </div>
+            <div class="col s12 m4 red">
+                COLUMN 2
+            </div>
+            <div class="col s12 m4 blue">
+                COLUMN 3
             </div>
         </div>
-
-        <!-- <div class="row">
-            <div class="input-field col s6">
-                <div id="ages"></div>
-                <label for="ages">Age Group</label>
-            </div>
-            <div class="input-field col s6">
-                <input type="checkbox" class="filled-in" id="male" value="male"/>
-                <label for="male">Allow Men</label>
-                <input type="checkbox" class="filled-in" id="female" value="female"/>
-                <label for="female">Allow Women</label>
-            </div>
-        </div> -->
-        <button id="beaconSubmit" type="submit">Create</button>
-    </form>
+    </div>
 </div>
 
-<button id="beaconCreate">+</button>
-
 <script src="../assets/js/beacon.js"></script>
-<script>
+    <script>
     $('#beaconCreate').on('click', function(event){
-            $('#beaconForm').toggle(400);
+        $('#beaconForm').toggle(400);
     });
     $(document).ready(function() {
         $('select').material_select();
     });
 </script>
-
