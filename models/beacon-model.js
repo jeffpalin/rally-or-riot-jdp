@@ -46,26 +46,27 @@ module.exports = function(sequelize, DataTypes) {
         },
         population: {
             type: DataTypes.INTEGER,
-            allowNull: true
-        },
-        ageMin: {
-            type: DataTypes.INTEGER,
-            allowNull: true
-        },
-        ageMax: {
-            type: DataTypes.INTEGER,
-            allowNull: true
-        },
-        gender: {
-            type: DataTypes.STRING,
-            allowNull: true
-        },
-        lat: {
-            type: DataTypes.DECIMAL(16, 6)
-        },
-        lng: {
-            type: DataTypes.DECIMAL(16, 6)
+            allowNull: false,
+            defaultValue: 1
         }
+        // ageMin: {
+        //     type: DataTypes.INTEGER,
+        //     allowNull: true
+        // },
+        // ageMax: {
+        //     type: DataTypes.INTEGER,
+        //     allowNull: true
+        // },
+        // gender: {
+        //     type: DataTypes.STRING,
+        //     allowNull: true
+        // },
+        // lat: {
+        //     type: DataTypes.DECIMAL(16, 6)
+        // },
+        // lng: {
+        //     type: DataTypes.DECIMAL(16, 6)
+        // }
     });
     return Beacon;
 };

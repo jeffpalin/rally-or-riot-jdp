@@ -17,3 +17,36 @@
         FILE: rr-style.css - Global stylesheet for Rally or Riot project
 
 *******************************************************************************/
+
+nav {
+      background: linear-gradient(225deg, #e14b31, #2cd1df);
+      background-size: 300% 300%;
+      box-sizing: border-box;
+      display: table;
+      margin: 0;
+      -webkit-animation: Rainbow 5s ease infinite;
+      -moz-animation: Rainbow 5s ease infinite;
+      animation: Rainbow 5s ease infinite;
+    }
+
+    @-webkit-keyframes Rainbow {
+      0% {
+        background-position: 94% 0%; }
+      50% {
+        background-position: 7% 100%; }
+      100% {
+        background-position: 94% 0%; } }
+
+.explore-bar p{
+    padding: 0;
+    margin: 0;
+}
+
+.explore-bar {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.beacons {
+    margin-top: 1rem;
+}
