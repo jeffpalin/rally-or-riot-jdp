@@ -21,7 +21,17 @@ exports.landing = function(req, res) {
 }
 
 exports.explore = function(req, res) {
-    res.render('explore', {user: req.user});
+    if (req.body) {
+        db.Beacon.findAll({}).then(function(result) {
+
+            var beaconObj = {
+                user: req.user,
+                beacon: result
+            };
+
+            res.render('explore', beaconObj);
+        });
+    }
 }
 
 exports.profile = function(req, res) {
@@ -56,10 +66,4 @@ exports.beacon = function(req, res) {
     }).then(function(results) {
         res.send(results);
     });
-
-// exports.beaconList = function(req, res) {
-//     db.Beacon.findAll({}).then(function(result) {
-//         res.json(result);
-//     });
-// }
 }
