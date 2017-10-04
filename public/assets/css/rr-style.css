@@ -66,15 +66,13 @@ nav {
     max-width: 20px;
 }
 
-#likes{
-	height:5px;
-	width:50%;
-	background:#0000ee;
-	float:left;
-}
-#dislikes{
-	height:5px;
-	width:50%;
-	background:#ccc;
-	float:right;
-}
+/* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+       #map {
+        height: 100%;
+        width: 100%;
+        max-width: 36rem;
+        max-height: 24rem;
+        position: absolute;
+        overflow: none;
+      }

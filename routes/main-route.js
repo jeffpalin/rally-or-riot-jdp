@@ -1,4 +1,5 @@
 var mainController = require('../controllers/main-controller.js');
+var db = require('../models');
 
 module.exports = function(app, passport) {
 
@@ -9,6 +10,7 @@ module.exports = function(app, passport) {
     app.get('/signout', mainController.signout);
     app.get('/explore', isSignedIn, mainController.explore);
     app.get('/profile/:username?', isSignedIn, mainController.profile);
+
 
     // POST ROUTES
     app.post('/signup', passport.authenticate('local-signup', {
@@ -29,4 +31,5 @@ module.exports = function(app, passport) {
             return next();
         res.redirect('/signin');
     }
+
 }

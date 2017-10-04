@@ -1,23 +1,47 @@
-<h2>Explore</h2>
-<h5>Hurray! {{user.username}} you are logged in.</h5>
-
-<div id="beaconForm" style="display:none">
-    <form>
+<div class="grey lighten-3">
+    <div class="container explore-bar">
         <div class="row">
-            <div class="input-field col s6">
-                <input placeholder="Enter a creative title" id="name" type="text" class="validate">
-                <label for="name">Beacon Name</label>
+            <div class="col s12"><span class="flow-text">
+                <p>
+                    <h5>Welcome Back, <a href="profile/{{user.username}}">{{user.username}}</a>!</h5>
+                    <h6>Explore Your Next Rally or Riot</h6></span>
+                </p>
             </div>
+            <div class="col s12">
+                <!-- Dropdown Trigger -->
+                <a class='dropdown-button btn grey' data-beloworigin="true" href='#' data-activates='categories'>Category</a>
+                <ul id='categories' class='dropdown-content'>
+                    <li><a href="#!">one</a></li>
+                    <li><a href="#!">two</a></li>
+                    <li><a href="#!">three</a></li>
+                    <li><a href="#!"><i class="material-icons">view_module</i>four</a></li>
+                    <li><a href="#!"><i class="material-icons">cloud</i>five</a></li>
+                </ul>
 
-            <div class="input-field col s6">
-                <input placeholder="What are you doing here?" id="activity" type="text" class="validate">
-                <label for="activity">Activity</label>
+                <a id="beaconCreate" class="btn-floating btn-medium waves-effect waves-light grey"><i class="material-icons">settings_remote</i></a>
             </div>
         </div>
+    </div>
+</div>
 
-        <div class="row">
-            <div class="input-field col s6">
-                <select id="category" name="category">
+<div class="container">
+    <div id="beaconForm" style="display:none">
+        <form>
+            <div class="row">
+                <div class="input-field col s6">
+                    <input placeholder="Enter a creative title" id="name" type="text" class="validate">
+                    <label for="name">Beacon Name</label>
+                </div>
+
+                <div class="input-field col s6">
+                    <input placeholder="What are you doing here?" id="activity" type="text" class="validate">
+                    <label for="activity">Activity</label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s6">
+                    <select id="category" name="category">
                         <option data-icon="images/sample-1.jpg" class="circle" value="concert">Concerts</option>
                         <option data-icon="images/sample-1.jpg" class="circle" value="exercise">Exercising</option>
                         <option data-icon="images/sample-1.jpg" class="circle" value="food">Eating</option>
@@ -27,8 +51,15 @@
                         <option data-icon="images/sample-1.jpg" class="circle" value="study">Studying</option>
                         <option data-icon="images/sample-1.jpg" class="circle" value="uncategorized" selected>Uncategorized</option>
                         <option data-icon="images/sample-1.jpg" class="circle" value="yardsale">Yard Sale</option>
-                </select>
-                <label for="category">Category</label>
+                    </select>
+                    <label for="category">Category</label>
+                </div>
+
+                <!-- TODO: Beacon Tags -->
+                <div class="input-field col s6">
+                    <input placeholder="Yoga, Movies, Tailgating" id="tags" type="text" class="validate">
+                    <label for="tags">Tags (seperate by comma)</label>
+                </div>
             </div>
 
             <!-- TODO: Beacon Demographics <div class="row">
@@ -57,49 +88,78 @@
                             <p>{{this.activity}}</p>
                         </div>
                         <div class="card-action">
-                            <div id="bar">
-                        		<div id="rallies-{{this.id}}">{{this.rallies}}</div>
-                        		<div id="riots-{{this.id}}">{{this.riots}}</div>
-                        	</div>
+                            <div class="beacon-votes">
 
-                            <div id="{{this.id}}">
-                                <button class="btn waves-effect waves-light grey rallyBtn">
-                                    <img class="vote-ra" src="/assets/img/icon-rally.svg">Rally
-                                </button>
-                                <button class="btn waves-effect waves-light grey riotBtn">
-                                    <img class="vote-ri" src="/assets/img/icon-riot.svg">Riot
-                                </button>
                             </div>
+                            <a class="black-text" href="#"><img class="vote-ra" src="/assets/img/icon-rally.svg">Rally</a>
+                            <a class="black-text" href="#"><img class="vote-ri" src="/assets/img/icon-riot.svg">Riot</a>
                         </div>
                     </div>
                 {{/each}}
             </div>
+
+            {{!-- <div class="col s12 m4 red">
+                COLUMN 2
+            </div> --}}
+
+            <div class="col s12 m5 l5">
+                <div id="map"></div>
+            </div>
         </div>
-
-        <!-- <div class="row">
-            <div class="input-field col s6">
-                <div id="ages"></div>
-                <label for="ages">Age Group</label>
-            </div>
-            <div class="input-field col s6">
-                <input type="checkbox" class="filled-in" id="male" value="male"/>
-                <label for="male">Allow Men</label>
-                <input type="checkbox" class="filled-in" id="female" value="female"/>
-                <label for="female">Allow Women</label>
-            </div>
-        </div> -->
-        <button id="beaconSubmit" type="submit">Create</button>
-    </form>
+    </div>
 </div>
+<script>
+      // Note: This example requires that you consent to location sharing when
+      // prompted by your browser. If you see the error "The Geolocation service
+      // failed.", it means you probably did not give permission for the browser to
+      // locate you.
+      var map, infoWindow;
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: -34.397, lng: 150.644},
+          zoom: 6
+        });
+        infoWindow = new google.maps.InfoWindow;
 
-<button id="beaconCreate">+</button>
+        // Try HTML5 geolocation.
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+            var pos = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+
+            infoWindow.setPosition(pos);
+            infoWindow.setContent('Location found.');
+            infoWindow.open(map);
+            map.setCenter(pos);
+          }, function() {
+            handleLocationError(true, infoWindow, map.getCenter());
+          });
+        } else {
+          // Browser doesn't support Geolocation
+          handleLocationError(false, infoWindow, map.getCenter());
+        }
+      }
+
+      function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+        infoWindow.setPosition(pos);
+        infoWindow.setContent(browserHasGeolocation ?
+                              'Error: The Geolocation service failed.' :
+                              'Error: Your browser doesn\'t support geolocation.');
+        infoWindow.open(map);
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAwORWZDYOjHiXTWvwdeW04ecXeBuM1uqM&callback=initMap">
+    </script>
 
 <script src="../assets/js/beacon.js"></script>
-<script>
+    <script>
     $('#beaconCreate').on('click', function(event){
-            $('#beaconForm').toggle(400);
+        $('#beaconForm').toggle(400);
     });
-    $(document).ready(function() {
+    $('document').ready(function() {
         $('select').material_select();
     });
 </script>
