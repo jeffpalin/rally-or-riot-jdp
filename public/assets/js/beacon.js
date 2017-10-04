@@ -1,3 +1,4 @@
+//Beacon Creation
 $('#beaconSubmit').on('click', function(event) {
     event.preventDefault();
 
@@ -23,18 +24,41 @@ function submitBeacon(beacon)
     });
 }
 
+//Beacon Voting
 $('.rallyBtn').on('click', function(event) {
     event.preventDefault();
-    var beacon_id = $(this).parent().attr('id');
-    var rallyCount = $('#rallies-'+beacon_id).html();
-    var newRally = parseInt(rallyCount)+1;
 
-    console.log(newRally);
+    var beaconId = $(this).parent().attr('id');
+    var rallyCount = $('#rallies-'+beaconId).html();
+    var newRally = parseInt(rallyCount) + 1;
 
-    // $.post('/beacon/rally', beacon)
-    // .done(function(data) {
-    //     //
-    // });
+    var beaconRally = {
+        id: beaconId,
+        rallies: newRally
+    }
+
+    $.post('/beacon/rally', beaconRally)
+    .done(function(data) {
+        $('#rallies-'+beaconId).html(newRally);
+    });
+});
+
+$('.riotBtn').on('click', function(event) {
+    event.preventDefault();
+
+    var beaconId = $(this).parent().attr('id');
+    var riotCount = $('#riots-'+beaconId).html();
+    var newRiot = parseInt(riotCount) + 1;
+
+    var beaconRiot = {
+        id: beaconId,
+        riots: newRiot
+    }
+
+    $.post('/beacon/riot', beaconRiot)
+    .done(function(data) {
+        $('#riots-'+beaconId).html(newRiot);
+    });
 });
 
 // // Beacon Voting

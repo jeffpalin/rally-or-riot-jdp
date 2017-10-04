@@ -44,7 +44,8 @@ nav {
       50% {
         background-position: 7% 100%; }
       100% {
-        background-position: 94% 0%; } }
+        background-position: 94% 0%; }
+    }
 
 .explore-bar p{
     padding: 0;
@@ -66,13 +67,11 @@ nav {
     max-width: 20px;
 }
 
-/* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
-       #map {
-        height: 100%;
-        width: 100%;
-        max-width: 36rem;
-        max-height: 24rem;
-        position: absolute;
-        overflow: none;
-      }
+#map {
+    height: 100%;
+    width: 100%;
+    max-width: 36rem;
+    max-height: 24rem;
+    position: absolute;
+    overflow: none;
+}

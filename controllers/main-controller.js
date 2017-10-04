@@ -68,12 +68,24 @@ exports.beacon = function(req, res) {
 
 exports.rally = function(req, res) {
     db.Beacon.update({
-      rallies: req.body.rallies
+        rallies: req.body.rallies
     }, {
-      where: {
-        id: req.body.id
-      }
+        where: {
+            id: req.body.id
+        }
     }).then(function(dbTodo) {
-      res.json(dbTodo);
+        res.json(dbTodo);
+    });
+}
+
+exports.riot = function(req, res) {
+    db.Beacon.update({
+        riots: req.body.riots
+    }, {
+        where: {
+            id: req.body.id
+        }
+    }).then(function(dbTodo) {
+        res.json(dbTodo);
     });
 }
