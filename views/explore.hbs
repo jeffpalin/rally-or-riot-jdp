@@ -31,10 +31,48 @@
                 <label for="category">Category</label>
             </div>
 
-            <!-- TODO: Beacon Tags -->
-            <div class="input-field col s6">
-                <input placeholder="Yoga, Movies, Tailgating" id="tags" type="text" class="validate">
-                <label for="tags">Tags (seperate by comma)</label>
+            <!-- TODO: Beacon Demographics <div class="row">
+                <div class="input-field col s6">
+                    <div id="ages"></div>
+                    <label for="ages">Age Group</label>
+                </div>
+                <div class="input-field col s6">
+                    <input type="checkbox" class="filled-in" id="male" value="male"/>
+                    <label for="male">Allow Men</label>
+                    <input type="checkbox" class="filled-in" id="female" value="female"/>
+                    <label for="female">Allow Women</label>
+                </div>
+            </div> -->
+            <button class="btn waves-effect waves-light grey" id="beaconSubmit" type="submit">Create</button>
+        </form>
+    </div>
+
+    <div class="beacons">
+        <div class="row">
+            <div class="col s12 m7 l7">
+                {{#each beacon}}
+                    <div class="card">
+                        <div class="card-content">
+                            <span class="card-title">{{this.name}}</span>
+                            <p>{{this.activity}}</p>
+                        </div>
+                        <div class="card-action">
+                            <div id="bar">
+                        		<div id="rallies-{{this.id}}">{{this.rallies}}</div>
+                        		<div id="riots-{{this.id}}">{{this.riots}}</div>
+                        	</div>
+
+                            <div id="{{this.id}}">
+                                <button class="btn waves-effect waves-light grey rallyBtn">
+                                    <img class="vote-ra" src="/assets/img/icon-rally.svg">Rally
+                                </button>
+                                <button class="btn waves-effect waves-light grey riotBtn">
+                                    <img class="vote-ri" src="/assets/img/icon-riot.svg">Riot
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                {{/each}}
             </div>
         </div>
 

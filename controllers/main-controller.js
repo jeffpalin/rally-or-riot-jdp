@@ -57,3 +57,15 @@ exports.beacon = function(req, res) {
         res.send(results);
     });
 }
+
+exports.rally = function(req, res) {
+    db.Beacon.update({
+      rallies: req.body.rallies
+    }, {
+      where: {
+        id: req.body.id
+      }
+    }).then(function(dbTodo) {
+      res.json(dbTodo);
+    });
+}

@@ -22,6 +22,7 @@ module.exports = function(app, passport) {
     }));
 
     app.post("/beacon/new", isSignedIn, mainController.beacon);
+    app.post("beacon/rally", isSignedIn, mainController.rally);
 
     function isSignedIn(req, res, next) {
         if (req.isAuthenticated())
