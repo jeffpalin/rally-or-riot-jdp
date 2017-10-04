@@ -7,7 +7,8 @@
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link rel="stylesheet" href="/assets/css/rr-style.css" type="text/css">
 
-	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+	 crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
 	<script src="https://use.fontawesome.com/9497edb156.js"></script>
 
@@ -16,7 +17,7 @@
 
 <body>
 
-{{!-- NAVIGATION START --}}
+	{{!-- NAVIGATION START --}}
 
 	<nav role="navigation">
 		<div class="nav-wrapper container">
@@ -24,19 +25,21 @@
 
 			<ul class="right hide-on-med-and-down">
 				{{#if user}}
-					<li><a href="/explore"><i class="fa fa-compass" aria-hidden="true"></i> Explore</a></li>
-					<li style="padding:0 10px 0 10px">|</li>
-					<li>
-						<a href="profile/{{user.username}}">
-							<i class="fa fa-user-circle" aria-hidden="true"></i>
-							{{user.username}}
-						</a>
-					</li>
-					<li><a href="/signout"><i class="fa fa-sign-out" aria-hidden="true"></i> Sign Out</a></li>
+				<li>
+					<a href="/explore"><i class="fa fa-compass" aria-hidden="true"></i> Explore</a>
+				</li>
+				<li style="padding:0 10px 0 10px">|</li>
+				<li>
+					<a href="profile/{{user.username}}">
+						<i class="fa fa-user-circle" aria-hidden="true"></i>
+						{{user.username}}
+					</a>
+				</li>
+				<li><a href="/signout"><i class="fa fa-sign-out" aria-hidden="true"></i> Sign Out</a></li>
 				{{^}}
-					<li><a href="/signup">Sign Up</a></li>
-					<li><a href="/signin">Sign In</a></li>
-				{{/if}}
+				<li><a href="/signup">Sign Up</a></li>
+				<li><a href="/signin">Sign In</a></li>
+					{{/if}}
 			</ul>
 
 			<ul id="nav-mobile" class="side-nav">
@@ -51,20 +54,23 @@
 		</div>
 	</nav>
 
-{{!-- NAVIGATION END - WITH MOBILE RESPONSIVE COLLAPSIBLE BURGER MENU --}}
+	{{!-- NAVIGATION END - WITH MOBILE RESPONSIVE COLLAPSIBLE BURGER MENU --}}
 
+	<main>
+		{{{ body }}}
+	</main>
 
-	{{{ body }}}
-
-
-{{!-- FOOTER BELOW  --}}
+	{{!-- FOOTER BELOW --}}
 
 	<footer class="page-footer grey darken-4">
 		<div class="container">
 			<div class="row">
 				<div class="col l6 s12">
 					<h5 class="white-text">Lorem Ipsum Dolor</h5>
-					<p class="grey-text text-lighten-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ac diam ac enim cursus venenatis a quis dolor. Ut venenatis cursus leo sit amet dictum. Proin euismod gravida ipsum. Aliquam dapibus sapien vitae orci efficitur, in laoreet ipsum facilisis. Praesent in velit vel mi egestas luctus id sed tellus. Curabitur mattis, diam quis posuere imperdiet, felis lacus volutpat odio, sit amet vulputate turpis ante convallis velit. Duis pellentesque enim eu cursus vestibulum.</p>
+					<p class="grey-text text-lighten-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ac diam ac enim cursus venenatis a quis dolor. Ut venenatis
+						cursus leo sit amet dictum. Proin euismod gravida ipsum. Aliquam dapibus sapien vitae orci efficitur, in laoreet ipsum
+						facilisis. Praesent in velit vel mi egestas luctus id sed tellus. Curabitur mattis, diam quis posuere imperdiet, felis
+						lacus volutpat odio, sit amet vulputate turpis ante convallis velit. Duis pellentesque enim eu cursus vestibulum.</p>
 				</div>
 				<div class="col l4 offset-l2 s12">
 					<h5 class="white-text">Connect With Us</h5>
@@ -79,19 +85,44 @@
 		</div>
 		<div class="footer-copyright">
 			<div class="container">
-				© 2017 Copyright Text
-				{{!-- <a class="grey-text text-lighten-4 right" href="#!">More Links</a> --}}
+				© 2017 Copyright Text {{!-- <a class="grey-text text-lighten-4 right" href="#!">More Links</a> --}}
 			</div>
 		</div>
 	</footer>
 
-{{!-- END FOOTER --}}
-<script>
-	(function ($) {
-		$(function () {
-			$('.button-collapse').sideNav();
-		}); // end of document ready
-	})(jQuery); // end of jQuery name space
-</script>
+	{{!-- END FOOTER --}}
+	<script>
+		(function ($) {
+			$(function () {
+				$('.button-collapse').sideNav();
+			}); // end of document ready
+		})(jQuery); // end of jQuery name space
+
+	</script>
+	<script>
+		var urlLocation = window.location.pathname;
+		var navBar = $(".right.hide-on-med-and-down li a");
+		var navLength = navBar.length;
+		
+		// loop through all the nav elements
+		for(var i = 0; i < navLength; i++) {
+			// getting the href for each a tag
+			var pathName = $(navBar[i]).attr("href");
+			
+			// if the href value is the same as the urlLocation
+			if(pathName === urlLocation) {
+				// add a class to that element
+				$(navBar[i]).addClass("active");
+				// and break out the loop
+				break;
+			} else if (pathName.includes("profile")) {
+				// catching our edge case for the profile
+				$(navBar[i]).addClass("active");
+				break;
+			}
+		}
+
+	</script>
 </body>
+
 </html>
