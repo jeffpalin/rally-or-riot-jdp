@@ -67,25 +67,73 @@ exports.beacon = function(req, res) {
 }
 
 exports.rally = function(req, res) {
-    db.Beacon.update({
-        rallies: req.body.rallies
-    }, {
+    db.Vote.findOrCreate({
         where: {
-            id: req.body.id
+            beacon_id: req.body.id,
+            user_id: req.user.id
         }
-    }).then(function(dbTodo) {
-        res.json(dbTodo);
-    });
+    }).spread((voter, created) => {
+        if(voter.canRally){
+            db.Vote.update({
+                rally: true,
+                riot: false,
+                canRally: false,
+                canRiot: true
+            }, {
+                where: {
+                    beacon_id: voter.beacon_id
+                }
+            }).then(function(vote) {
+                if(created){
+                    db.Beacon.update({rallies: req.body.rallies}, {where: {id: req.body.id}
+                    }).then(function(done) {
+                        console.log("updated...");
+                    });
+                }
+                if(!created){
+                    //TODO: Recount rallies and riots when switching vote
+                    db.Beacon.update({rallies: req.body.rallies}, {where: {id: req.body.id}
+                    }).then(function(done) {
+                        console.log("updated...");
+                    });
+                }
+            })
+        } else {
+            console.log("User can not rally");
+        }
+    })
 }
 
 exports.riot = function(req, res) {
-    db.Beacon.update({
-        riots: req.body.riots
-    }, {
+    db.Vote.findOrCreate({
         where: {
-            id: req.body.id
+            beacon_id: req.body.id,
+            user_id: req.user.id
         }
-    }).then(function(dbTodo) {
-        res.json(dbTodo);
-    });
+    }).spread((voter, created) => {
+        if(voter.canRiot){
+            db.Vote.update({
+                rally: false,
+                riot: true,
+                canRally: true,
+                canRiot: false
+            }, {
+                where: {
+                    beacon_id: voter.beacon_id
+                }
+            }).then(function(vote) {
+                db.Beacon.update({
+                    riots: req.body.riots
+                }, {
+                    where: {
+                        id: req.body.id
+                    }
+                }).then(function(done) {
+                    console.log("updated...");
+                });
+            })
+        } else {
+            console.log("User can not riot");
+        }
+    })
 }
