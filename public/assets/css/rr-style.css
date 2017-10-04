@@ -17,6 +17,15 @@
         FILE: rr-style.css - Global stylesheet for Rally or Riot project
 
 *******************************************************************************/
+body {
+      display: flex;
+      min-height: 100vh;
+      flex-direction: column;
+    }
+
+main {
+      flex: 1 0 auto;
+}
 
 nav {
       background: linear-gradient(225deg, #e14b31, #2cd1df);
@@ -51,13 +60,8 @@ nav {
     margin-top: 1rem;
 }
 
-body {
-      display: flex;
-      min-height: 100vh;
-      flex-direction: column;
-    }
-  
-main {
-      flex: 1 0 auto;
+.vote-ra,
+.vote-ri
+{
+    max-width: 20px;    
 }
-      
