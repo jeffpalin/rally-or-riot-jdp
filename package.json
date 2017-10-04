@@ -22,6 +22,7 @@
     "express": "^4.16.0",
     "express-handlebars": "^3.0.0",
     "express-session": "^1.15.6",
+    "google-geolocation": "^1.0.1",
     "method-override": "^2.3.10",
     "mysql2": "^1.4.2",
     "passport": "^0.4.0",

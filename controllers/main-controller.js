@@ -25,7 +25,8 @@ exports.explore = function(req, res) {
 
         var beaconObj = {
             user: req.user,
-            beacon: result
+            beacon: result,
+            // location: req.location
         };
 
         res.render('explore', beaconObj);
@@ -55,12 +56,12 @@ exports.beacon = function(req, res) {
         name: req.body.name,
         activity: req.body.activity,
         category: req.body.category,
-        population: 1
+        population: 1,
         // ageMin: req.body.ageMin,
         // ageMax: req.body.ageMax,
         // gender: req.body.gender
-        // lat: req.body.lat,
-        // lng: req.body.lng
+        lat: req.body.lat,
+        lng: req.body.lng
     }).then(function(results) {
         res.redirect('/explore');
     });
