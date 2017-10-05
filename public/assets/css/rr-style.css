@@ -38,6 +38,11 @@ nav {
       animation: Rainbow 5s ease infinite;
     }
 
+nav ul a.active {
+      background-color: rgba(0,0,0,0.1);
+}
+
+
     @-webkit-keyframes Rainbow {
       0% {
         background-position: 94% 0%; }
