@@ -1,23 +1,3 @@
-/********************************************************************************
-      ."".    ."",       ____        ____                       ____  _       __
-      |  |   /  /       / __ \____ _/ / /_  __   ____  _____   / __ \(_)___  / /_
-      |  |  /  /       / /_/ / __ `/ / / / / /  / __ \/ ___/  / /_/ / / __ \/ __/
-      |  | /  /       / _, _/ /_/ / / / /_/ /  / /_/ / /     / _, _/ / /_/ / /_
-      |  |/  ;-._    /_/ |_|\__,_/_/_/\__, /   \____/_/     /_/ |_/_/\____/\__/
-      }  ` _/  / ;                   /____/
-      |  /` ) /  /
-      | /  /_/\_/\   (c) 2017 Rally or Riot
-      |/  /      |   Project authored by:
-      (  ' \ '-  |   - Dayton Mills
-       \    `.  /    - Jeanelle Sebastion
-        |      |     - Jeff Palin
-        |      |     - Nick Saponaro
-        |      |     - Rowinn Dionisio
-
-        FILE: beacon-model.js - Beacon table creation model
-
-*******************************************************************************/
-
 module.exports = function(sequelize, DataTypes) {
     var Beacon = sequelize.define("Beacon", {
         user_id: {
@@ -48,7 +28,7 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.INTEGER,
             allowNull: false,
             defaultValue: 1
-        }
+        },
         // ageMin: {
         //     type: DataTypes.INTEGER,
         //     allowNull: true
@@ -61,12 +41,16 @@ module.exports = function(sequelize, DataTypes) {
         //     type: DataTypes.STRING,
         //     allowNull: true
         // },
-        // lat: {
-        //     type: DataTypes.DECIMAL(16, 6)
-        // },
-        // lng: {
-        //     type: DataTypes.DECIMAL(16, 6)
-        // }
+        lat: {
+            type: DataTypes.DECIMAL(16, 6)
+        },
+        lng: {
+            type: DataTypes.DECIMAL(16, 6)
+        },
+        location: {
+            type: DataTypes.STRING,
+            allowNull: false
+        }
     });
     return Beacon;
 };
