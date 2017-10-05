@@ -34,7 +34,6 @@ exports.explore = function(req, res) {
 }
 
 exports.profile = function(req, res) {
-
     db.User.findOne({
         where: {
             username: req.params.username
@@ -55,7 +54,6 @@ exports.profile = function(req, res) {
     }).catch(function(err) {
         res.render(err)
     });
-
 };
 
 exports.beacon = function(req, res) {
