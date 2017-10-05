@@ -23,16 +23,12 @@ exports.landing = function(req, res) {
 }
 
 exports.explore = function(req, res) {
-    db.Beacon.findAll({order: [['updatedAt', 'DESC']]}).then(function(result) {
-
+    db.Beacon.findAll({include: [db.User], order: [['updatedAt', 'DESC']]}).then(function(beacons) {
         var beaconObj = {
             user: req.user,
-            beacon: result,
-            location: req.body.location,
-            lat: req.body.lat,
-            lng: req.body.lng
+            beacon: beacons,
         }
-
+        
         res.render('explore', beaconObj);
     });
 }
@@ -63,18 +59,51 @@ exports.profile = function(req, res) {
 };
 
 exports.beacon = function(req, res) {
+    var icon;
+    switch(req.body.category)
+    {
+        case 'concert':
+            icon = 'fa-music';
+            break;
+        case 'exercise':
+            icon = 'fa-bicycle';
+            break;
+        case 'food':
+            icon = 'fa-cutlery';
+            break;
+        case 'party':
+            icon = 'fa-glass';
+            break;
+        case 'political':
+            icon = 'fa-gavel';
+            break;
+        case 'social':
+            icon = 'fa-comment';
+            break;
+        case 'study':
+            icon = 'fa-graduation-cap';
+            break;
+        case 'uncategorized':
+            icon = 'fa-folder-open';
+            break;
+        case 'yardsale':
+            icon = 'fa-money';
+            break;
+    }
+
     db.Beacon.create({
         user_id: req.user.id,
         name: req.body.name,
         activity: req.body.activity,
         category: req.body.category,
+        icon: icon,
         population: 1,
         lat: req.body.lat,
         lng: req.body.lng,
-        location: req.body.location
+        location: req.body.location,
+        UserId: req.user.id
     }).then(function(results) {
         // res.redirect('/explore');
-        res.json(results);
     });
 }
 
