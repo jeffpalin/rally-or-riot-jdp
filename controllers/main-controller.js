@@ -24,13 +24,12 @@ exports.landing = function(req, res) {
 
 exports.explore = function(req, res) {
     db.Beacon.findAll({order: [['updatedAt', 'DESC']]}).then(function(result) {
-    
-            var beaconObj = {
-                user: req.user,
-                beacon: result,
-                location: req.body.location
-            }
-        
+
+        var beaconObj = {
+            user: req.user,
+            beacon: result,
+            location: req.body.location
+        }
 
         res.render('explore', beaconObj);
     });
@@ -60,9 +59,6 @@ exports.beacon = function(req, res) {
         activity: req.body.activity,
         category: req.body.category,
         population: 1,
-        // ageMin: req.body.ageMin,
-        // ageMax: req.body.ageMax,
-        // gender: req.body.gender
         lat: req.body.lat,
         lng: req.body.lng,
         location: req.body.location
@@ -71,74 +67,139 @@ exports.beacon = function(req, res) {
     });
 }
 
+exports.votes = function(req, res) {
+    db.Beacon.findAll({attributes: ['id', 'rallies', 'riots']}).then(function(beacons) {
+        db.Vote.findAll({attributes: ['beacon_id', 'canRally', 'canRiot'], where: {user_id: req.user.id}})
+        .then(function(votes) {
+            var response = {
+                beacons: beacons,
+                votes: votes
+            }
+            res.json(response);
+        });
+    });
+}
+
 exports.rally = function(req, res) {
-    db.Vote.findOrCreate({
-        where: {
-            beacon_id: req.body.id,
-            user_id: req.user.id
-        }
-    }).spread((voter, created) => {
-        if(voter.canRally){
-            db.Vote.update({
-                rally: true,
-                riot: false,
-                canRally: false,
-                canRiot: true
-            }, {
-                where: {
-                    beacon_id: voter.beacon_id
-                }
-            }).then(function(vote) {
-                if(created){
-                    db.Beacon.update({rallies: req.body.rallies}, {where: {id: req.body.id}
-                    }).then(function(done) {
-                        console.log("updated...");
+    db.Beacon
+    .findOne({ where: { id: req.body.id } })
+    .then(function(beacon) {
+        db.Vote.findOrCreate({
+            where: {
+                beacon_id: beacon.id,
+                user_id: req.user.id
+            }
+        }).spread((voter, created) => {
+            if(created) {
+                db.Beacon.update({
+                    rallies: beacon.rallies + 1
+                },{
+                    where: {
+                        id: beacon.id
+                    }
+                })
+                .then(function(updated) {
+                    db.Vote.update({
+                        rally: true,
+                        riot: false,
+                        canRally: false,
+                        canRiot: true
+                    }, {
+                        where: {
+                            beacon_id: beacon.id,
+                            user_id: req.user.id
+                        }
+                    })
+                });
+            }
+            else {
+                if(voter.canRally)
+                {
+                    db.Beacon.update({
+                        rallies: beacon.rallies + 1,
+                        riots: beacon.riots - 1
+                    },{
+                        where: {
+                            id: beacon.id
+                        }
+                    })
+                    .then(function(updated) {
+                        db.Vote.update({
+                            rally: true,
+                            riot: false,
+                            canRally: false,
+                            canRiot: true
+                        }, {
+                            where: {
+                                beacon_id: beacon.id,
+                                user_id: req.user.id
+                            }
+                        })
                     });
                 }
-                if(!created){
-                    //TODO: Recount rallies and riots when switching vote
-                    db.Beacon.update({rallies: req.body.rallies}, {where: {id: req.body.id}
-                    }).then(function(done) {
-                        console.log("updated...");
-                    });
-                }
-            })
-        } else {
-            console.log("User can not rally");
-        }
+            }
+        });
     })
 }
 
 exports.riot = function(req, res) {
-    db.Vote.findOrCreate({
-        where: {
-            beacon_id: req.body.id,
-            user_id: req.user.id
-        }
-    }).spread((voter, created) => {
-        if(voter.canRiot){
-            db.Vote.update({
-                rally: false,
-                riot: true,
-                canRally: true,
-                canRiot: false
-            }, {
-                where: {
-                    beacon_id: voter.beacon_id
-                }
-            }).then(function(vote) {
+    db.Beacon
+    .findOne({ where: { id: req.body.id } })
+    .then(function(beacon) {
+        db.Vote.findOrCreate({
+            where: {
+                beacon_id: beacon.id,
+                user_id: req.user.id
+            }
+        }).spread((voter, created) => {
+            if(created) {
                 db.Beacon.update({
-                    riots: req.body.riots
-                }, {
+                    riots: beacon.riots + 1
+                },{
                     where: {
-                        id: req.body.id
+                        id: beacon.id
                     }
-                }).then(function(done) {
-                    console.log("updated...");
+                })
+                .then(function(updated) {
+                    db.Vote.update({
+                        rally: false,
+                        riot: true,
+                        canRally: true,
+                        canRiot: false
+                    }, {
+                        where: {
+                            beacon_id: beacon.id,
+                            user_id: req.user.id
+                        }
+                    })
                 });
-            })
-        } else {
-            console.log("User can not riot");
-        }
+            }
+            else {
+                if(voter.canRiot)
+                {
+                    db.Beacon.update({
+                        rallies: beacon.rallies - 1,
+                        riots: beacon.riots + 1
+                    },{
+                        where: {
+                            id: beacon.id
+                        }
+                    })
+                    .then(function(updated) {
+                        db.Vote.update({
+                            rally: false,
+                            riot: true,
+                            canRally: true,
+                            canRiot: false
+                        }, {
+                            where: {
+                                beacon_id: beacon.id,
+                                user_id: req.user.id
+                            }
+                        })
+                    });
+                }
+            }
+        });
     })
 }

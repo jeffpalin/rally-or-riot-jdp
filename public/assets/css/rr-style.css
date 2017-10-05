@@ -52,24 +52,77 @@ nav ul a.active {
         background-position: 94% 0%; }
     }
 
+.explore-bar {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
 .explore-bar p{
     padding: 0;
     margin: 0;
 }
 
-.explore-bar {
-    padding-top: 1rem;
-    padding-bottom: 1rem;
+#beacon-container {
+    max-height: 45rem;
+    overflow: scroll;
 }
 
 .beacons {
     margin-top: 1rem;
 }
 
+#bar
+{
+    padding-bottom: 20px;
+}
+
+.rallies
+{
+    width: 50%;
+    padding: 0 10px 0px 10px;
+    background: #3498db;
+    color: #fff;
+    float: left;
+}
+
+.riots
+{
+	width: 50%;
+    padding: 0 10px 0px 10px;
+	background: #e74c3c;
+    color: #fff;
+	float: right;
+}
+
+.rallyBtn,
+.riotBtn
+{
+    padding: 5px;
+    font-weight: bold;
+    text-transform: capitalize;
+    cursor: pointer;
+}
+
+.rallyBtn:hover
+{
+    color: #3498db;
+}
+
+.riotBtn:hover
+{
+    color: #e74c3c;
+}
+
+.riotBtn
+{
+    margin-left: 10px;
+}
+
 .vote-ra,
 .vote-ri
 {
-    max-width: 20px;
+    max-width: 16px;
+    margin-right: 5px;
 }
 
 #map {
@@ -79,11 +132,6 @@ nav ul a.active {
     max-height: 24rem;
     position: absolute;
     overflow: none;
-}
-
-#beacon-container {
-    max-height: 45rem;
-    overflow: scroll;
 }
 
 @media screen and (max-width: 1260px) {
