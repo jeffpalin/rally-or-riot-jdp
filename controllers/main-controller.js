@@ -28,7 +28,9 @@ exports.explore = function(req, res) {
         var beaconObj = {
             user: req.user,
             beacon: result,
-            location: req.body.location
+            location: req.body.location,
+            lat: req.body.lat,
+            lng: req.body.lng
         }
 
         res.render('explore', beaconObj);
@@ -63,7 +65,8 @@ exports.beacon = function(req, res) {
         lng: req.body.lng,
         location: req.body.location
     }).then(function(results) {
-        res.redirect('/explore');
+        // res.redirect('/explore');
+        res.json(results);
     });
 }
 
