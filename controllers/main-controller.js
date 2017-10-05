@@ -65,7 +65,8 @@ exports.beacon = function(req, res) {
         lng: req.body.lng,
         location: req.body.location
     }).then(function(results) {
-        res.redirect('/explore');
+        // res.redirect('/explore');
+        res.json(results);
     });
 }
 
