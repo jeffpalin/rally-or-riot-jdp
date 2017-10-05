@@ -95,23 +95,15 @@
                         <div class="card-action">
                             <div id="{{this.id}}">
                                 {{#if this.canRally}}
-                                    <button class="btn waves-effect waves-light grey rallyBtn">
-                                        <img class="vote-ra" src="/assets/img/icon-rally.svg">Rally
-                                    </button>
+                                    <span class="rallyBtn"><img class="vote-ra" src="/assets/img/icon-rally.svg">Rally</span> 
                                 {{^}}
-                                    <button class="btn waves-effect waves-light grey rallyBtn ">
-                                        <img class="vote-ra" src="/assets/img/icon-rally.svg">Rally
-                                    </button>
+                                    <span class="rallyBtn"><img class="vote-ra" src="/assets/img/icon-rally.svg">Rally</span>
                                 {{/if}}
 
                                 {{#if this.canRiot}}
-                                    <button class="btn waves-effect waves-light grey riotBtn">
-                                        <img class="vote-ri" src="/assets/img/icon-riot.svg">Riot
-                                    </button>
+                                    <span class="riotBtn"><img class="vote-ri" src="/assets/img/icon-riot.svg">Riot</span>
                                 {{^}}
-                                    <button class="btn waves-effect waves-light grey riotBtn">
-                                        <img class="vote-ri" src="/assets/img/icon-riot.svg">Riot
-                                    </button>
+                                    <span class="riotBtn"><img class="vote-ri" src="/assets/img/icon-riot.svg">Riot</span>
                                 {{/if}}
                             </div>
                         </div>
