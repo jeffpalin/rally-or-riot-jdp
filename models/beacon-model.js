@@ -46,11 +46,11 @@ module.exports = function(sequelize, DataTypes) {
         },
         lng: {
             type: DataTypes.DECIMAL(16, 6)
+        },
+        location: {
+            type: DataTypes.STRING,
+            allowNull: false
         }
-        // location: {
-        //     type: DataTypes.STRING,
-        //     allowNull: true
-        // }
     });
     return Beacon;
 };

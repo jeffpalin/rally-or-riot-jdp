@@ -1,4 +1,6 @@
 var db = require('../models');
+var geocoder = require('geocoder');
+var geolocation = require('geolocation');
 
 var exports = module.exports = {}
 
@@ -22,12 +24,13 @@ exports.landing = function(req, res) {
 
 exports.explore = function(req, res) {
     db.Beacon.findAll({order: [['updatedAt', 'DESC']]}).then(function(result) {
-
-        var beaconObj = {
-            user: req.user,
-            beacon: result,
-            // location: req.location
-        };
+    
+            var beaconObj = {
+                user: req.user,
+                beacon: result,
+                location: req.body.location
+            }
+        
 
         res.render('explore', beaconObj);
     });
@@ -61,7 +64,8 @@ exports.beacon = function(req, res) {
         // ageMax: req.body.ageMax,
         // gender: req.body.gender
         lat: req.body.lat,
-        lng: req.body.lng
+        lng: req.body.lng,
+        location: req.body.location
     }).then(function(results) {
         res.redirect('/explore');
     });
