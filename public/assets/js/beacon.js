@@ -5,7 +5,7 @@ $('#beaconSubmit').on('click', function(event) {
         var activity = $('#activity').val().trim();
         var category = $('#category').val().trim();
         var name = $('#name').val().trim();
-      
+
         function decodeLocation(position) {
             var apikey = 'AIzaSyAwORWZDYOjHiXTWvwdeW04ecXeBuM1uqM';
             var latlng = position.coords.latitude + ',' + position.coords.longitude;
@@ -52,35 +52,25 @@ function submitBeacon(beacon)
 $('.rallyBtn').on('click', function(event) {
     event.preventDefault();
 
-    var beaconId = $(this).parent().attr('id');
-    var rallyCount = $('#rallies-'+beaconId).html();
-    var newRally = parseInt(rallyCount) + 1;
-
-    var beaconRally = {
-        id: beaconId,
-        rallies: newRally
+    var newVote = {
+        id: $(this).parent().attr('id')
     }
 
-    $.post('/beacon/rally', beaconRally)
+    $.post('/beacon/rally', newVote)
     .done(function(data) {
-        $('#rallies-'+beaconId).html(newRally);
+        console.log(data);
     });
 });
 
 $('.riotBtn').on('click', function(event) {
     event.preventDefault();
 
-    var beaconId = $(this).parent().attr('id');
-    var riotCount = $('#riots-'+beaconId).html();
-    var newRiot = parseInt(riotCount) + 1;
-
-    var beaconRiot = {
-        id: beaconId,
-        riots: newRiot
+    var newVote = {
+        id: $(this).parent().attr('id')
     }
 
-    $.post('/beacon/riot', beaconRiot)
+    $.post('/beacon/riot', newVote)
     .done(function(data) {
-        $('#riots-'+beaconId).html(newRiot);
+        console.log(data);
     });
 });

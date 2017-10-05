@@ -95,12 +95,25 @@
                         	</div>
 
                             <div id="{{this.id}}">
-                                <button class="btn waves-effect waves-light grey rallyBtn">
-                                    <img class="vote-ra" src="/assets/img/icon-rally.svg">Rally
-                                </button>
-                                <button class="btn waves-effect waves-light grey riotBtn">
-                                    <img class="vote-ri" src="/assets/img/icon-riot.svg">Riot
-                                </button>
+                                {{#if this.canRally}}
+                                    <button class="btn waves-effect waves-light grey rallyBtn">
+                                        <img class="vote-ra" src="/assets/img/icon-rally.svg">Rally
+                                    </button>
+                                {{^}}
+                                    <button class="btn waves-effect waves-light grey rallyBtn ">
+                                        <img class="vote-ra" src="/assets/img/icon-rally.svg">Rally
+                                    </button>
+                                {{/if}}
+
+                                {{#if this.canRiot}}
+                                    <button class="btn waves-effect waves-light grey riotBtn">
+                                        <img class="vote-ri" src="/assets/img/icon-riot.svg">Riot
+                                    </button>
+                                {{^}}
+                                    <button class="btn waves-effect waves-light grey riotBtn">
+                                        <img class="vote-ri" src="/assets/img/icon-riot.svg">Riot
+                                    </button>
+                                {{/if}}
                             </div>
                         </div>
                     </div>
