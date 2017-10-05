@@ -1,11 +1,20 @@
 //Beacon Creation
+$('document').ready(function() {
+    $('select').material_select();
+});
+
+$('#beaconCreate').on('click', function(event){
+    $('#beaconForm').toggle(400);
+});
+
 $('#beaconSubmit').on('click', function(event) {
     event.preventDefault();
+    $('#loadingCard').toggle(400);
     navigator.geolocation.getCurrentPosition(function(position){
         var activity = $('#activity').val().trim();
         var category = $('#category').val().trim();
         var name = $('#name').val().trim();
-      
+
         function decodeLocation(position) {
             var apikey = 'AIzaSyAwORWZDYOjHiXTWvwdeW04ecXeBuM1uqM';
             var latlng = position.coords.latitude + ',' + position.coords.longitude;
@@ -45,6 +54,8 @@ function submitBeacon(beacon)
     $.post('/beacon/new', beacon)
     .done(function(data) {
         $('#beaconForm').toggle();
+        $('#loadingCard').toggle(400);
+        location.reload();
     });
 }
 
@@ -52,35 +63,80 @@ function submitBeacon(beacon)
 $('.rallyBtn').on('click', function(event) {
     event.preventDefault();
 
-    var beaconId = $(this).parent().attr('id');
-    var rallyCount = $('#rallies-'+beaconId).html();
-    var newRally = parseInt(rallyCount) + 1;
-
-    var beaconRally = {
-        id: beaconId,
-        rallies: newRally
+    var newVote = {
+        id: $(this).parent().attr('id')
     }
 
-    $.post('/beacon/rally', beaconRally)
+    $('#rallyBtn-'+newVote.id).css('color', '#3498db');
+    $('#riotBtn-'+newVote.id).css('color', '#000');
+
+    $.post('/beacon/rally', newVote)
     .done(function(data) {
-        $('#rallies-'+beaconId).html(newRally);
+        console.log('Posted: ' + data);
     });
 });
 
 $('.riotBtn').on('click', function(event) {
     event.preventDefault();
 
-    var beaconId = $(this).parent().attr('id');
-    var riotCount = $('#riots-'+beaconId).html();
-    var newRiot = parseInt(riotCount) + 1;
-
-    var beaconRiot = {
-        id: beaconId,
-        riots: newRiot
+    var newVote = {
+        id: $(this).parent().attr('id')
     }
 
-    $.post('/beacon/riot', beaconRiot)
+    let currentCount = $('#riots-'+newVote.id).val();
+
+    $('#riotBtn-'+newVote.id).css('color', '#e74c3c');
+    $('#rallyBtn-'+newVote.id).css('color', '#000');
+
+    $.post('/beacon/riot', newVote)
     .done(function(data) {
-        $('#riots-'+beaconId).html(newRiot);
+        console.log('Posted: ' + data);
     });
 });
+
+//Periodically refresh votes
+(function worker() {
+  $.ajax({
+    url: 'beacon/votes',
+    success: function(response) {
+        for(let beacon of response.beacons)
+        {
+            var rallies = beacon.rallies;
+            var riots = beacon.riots;
+
+            //Voting ratio bar
+            var total = rallies+riots;
+            var percRallies = (rallies/total)*100;
+            var percRiots = (riots/total)*100;
+
+            $('#rallies-'+beacon.id).css('width', percRallies.toString()+'%');
+            $('#riots-'+beacon.id).css('width', percRiots.toString()+'%');
+            $('#rallies-'+beacon.id).text(beacon.rallies + ' rallies');
+            $('#riots-'+beacon.id).text(beacon.riots + ' riots');
+
+            //Only render votes with real numbers
+            if(rallies === 0 || rallies == null){$('#rallies-'+beacon.id).css('display', 'none');}
+            else{$('#rallies-'+beacon.id).css('display', 'block');}
+
+            if(riots === 0 || riots == null){$('#riots-'+beacon.id).css('display', 'none');}
+            else{$('#riots-'+beacon.id).css('display', 'block');}
+        }
+
+        //Display already voted items as 'voted'
+        for(let vote of response.votes)
+        {
+            if(vote.canRally && !vote.canRiot){
+                $('#riotBtn-'+vote.beacon_id).css('color', '#e74c3c');
+                $('#rallyBtn-'+vote.beacon_id).css('color', '#000');
+            }
+            else if(vote.canRiot && !vote.canRally){
+                $('#rallyBtn-'+vote.beacon_id).css('color', '#3498db');
+                $('#riotBtn-'+vote.beacon_id).css('color', '#000');
+            }
+        }
+    },
+    complete: function() {
+      setTimeout(worker, 5000);
+    }
+  });
+})();

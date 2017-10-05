@@ -11,6 +11,8 @@ module.exports = function(app, passport) {
     app.get('/explore', isSignedIn, mainController.explore);
     app.get('/profile/:username?', isSignedIn, mainController.profile);
 
+    app.get('/beacon/votes', isSignedIn, mainController.votes);
+
     // POST ROUTES
     app.post('/signup', passport.authenticate('local-signup', {
         successRedirect: '/explore',

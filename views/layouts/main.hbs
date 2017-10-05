@@ -90,6 +90,17 @@
 	{{!-- END FOOTER --}}
 
 	<script>
+		(function ($) {
+			$(function () {
+				$('.button-collapse').sideNav();
+				$('.modal').modal();
+				$('#modal1').modal(open);
+				$('.modal-trigger').modal();
+			}); // end of document ready
+		})(jQuery); // end of jQuery name space
+
+
+	<script>
 		var urlLocation = window.location.pathname;
 		var navBar = $(".right.hide-on-med-and-down li a");
 		var navLength = navBar.length;
