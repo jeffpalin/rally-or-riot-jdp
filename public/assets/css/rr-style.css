@@ -17,9 +17,18 @@
         FILE: rr-style.css - Global stylesheet for Rally or Riot project
 
 *******************************************************************************/
+body {
+      display: flex;
+      min-height: 100vh;
+      flex-direction: column;
+    }
+
+main {
+      flex: 1 0 auto;
+}
 
 nav {
-      background: linear-gradient(225deg, #e14b31, #2cd1df);
+      background: linear-gradient(225deg, #e14b31, #DB2D1D, #2cd1df, #2980b9);
       background-size: 300% 300%;
       box-sizing: border-box;
       display: table;
@@ -29,24 +38,130 @@ nav {
       animation: Rainbow 5s ease infinite;
     }
 
+nav ul a.active {
+      background-color: rgba(0,0,0,0.1);
+}
+
+
     @-webkit-keyframes Rainbow {
       0% {
         background-position: 94% 0%; }
       50% {
         background-position: 7% 100%; }
       100% {
-        background-position: 94% 0%; } }
-
-.explore-bar p{
-    padding: 0;
-    margin: 0;
-}
+        background-position: 94% 0%; }
+    }
 
 .explore-bar {
     padding-top: 1rem;
     padding-bottom: 1rem;
 }
 
+.explore-bar p{
+    padding: 0;
+    margin: 0;
+}
+
+#beacon-container {
+    max-height: 45rem;
+    overflow: scroll;
+}
+
 .beacons {
     margin-top: 1rem;
 }
+
+#bar
+{
+    padding-bottom: 20px;
+}
+
+.rallies
+{
+    width: 50%;
+    padding: 0 10px 0px 10px;
+    background: #3498db;
+    color: #fff;
+    float: left;
+}
+
+.riots
+{
+	width: 50%;
+    padding: 0 10px 0px 10px;
+	background: #e74c3c;
+    color: #fff;
+	float: right;
+}
+
+.rallyBtn,
+.riotBtn
+{
+    padding: 5px;
+    font-weight: bold;
+    text-transform: capitalize;
+    cursor: pointer;
+}
+
+.rallyBtn:hover
+{
+    color: #3498db;
+}
+
+.riotBtn:hover
+{
+    color: #e74c3c;
+}
+
+.riotBtn
+{
+    margin-left: 10px;
+}
+
+.vote-ra,
+.vote-ri
+{
+    max-width: 16px;
+    margin-right: 5px;
+}
+
+#map {
+    height: 100%;
+    width: 100%;
+    max-width: 36rem;
+    max-height: 24rem;
+    position: absolute;
+    overflow: none;
+}
+
+@media screen and (max-width: 1260px) {
+    #map {
+        max-width: 31rem;
+    }
+}
+
+@media screen and (max-width: 1060px) {
+    #map {
+        max-width: 25rem;
+    }
+}
+
+
+.parallax-container {
+      min-height: 380px;
+      line-height: 0;
+      height: auto;
+      color: rgba(255,255,255,.9);
+    }
+      .parallax-container .section {
+        width: 100%;
+      }
+
+input.select-dropdown {
+    margin-bottom: 0px !important;
+}
+
+#explore-row {
+    margin-bottom: 0px !important;
+}
+    

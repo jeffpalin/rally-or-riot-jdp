@@ -1,29 +1,10 @@
-/********************************************************************************
-      ."".    ."",       ____        ____                       ____  _       __
-      |  |   /  /       / __ \____ _/ / /_  __   ____  _____   / __ \(_)___  / /_
-      |  |  /  /       / /_/ / __ `/ / / / / /  / __ \/ ___/  / /_/ / / __ \/ __/
-      |  | /  /       / _, _/ /_/ / / / /_/ /  / /_/ / /     / _, _/ / /_/ / /_
-      |  |/  ;-._    /_/ |_|\__,_/_/_/\__, /   \____/_/     /_/ |_/_/\____/\__/
-      }  ` _/  / ;                   /____/
-      |  /` ) /  /
-      | /  /_/\_/\   (c) 2017 Rally or Riot
-      |/  /      |   Project authored by:
-      (  ' \ '-  |   - Dayton Mills
-       \    `.  /    - Jeanelle Sebastion
-        |      |     - Jeff Palin
-        |      |     - Nick Saponaro
-        |      |     - Rowinn Dionisio
-
-        FILE: server.js - Global app configuration for Node/Express server
-
-*******************************************************************************/
-
 var express        = require('express');
 var exphbs         = require('express-handlebars')
 var passport       = require('passport');
 var session        = require('express-session');
 var bodyParser     = require('body-parser');
 var methodOverride = require('method-override');
+var geocoder = require('geocoder');
 
 var app = express();
 var port = process.env.PORT || 3100;

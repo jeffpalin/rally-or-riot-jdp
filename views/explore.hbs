@@ -1,25 +1,28 @@
 <div class="grey lighten-3">
     <div class="container explore-bar">
-        <div class="row">
+        <div class="row" id="explore-row">
             <div class="col s12"><span class="flow-text">
                 <p>
-                    <h5>Welcome Back, {{user.username}}!</h5>
-                    <h6>Explore Your Next Rally or Riot</h6></span>
+                    <h5>Welcome Back, <a href="profile/{{user.username}}">{{user.username}}</a>!</h5>
+                    <h6>Find Your Next Rally or Riot!</h6></span>
                 </p>
             </div>
-            <div class="col s12">
-                <!-- Dropdown Trigger -->
-                <a class='dropdown-button btn' data-beloworigin="true" href='#' data-activates='categories'><i class="material-icons">filter_list</i>Category</a>
+            <a class='btn grey' id="catbtn" data-beloworigin="true" href='#' data-activates='categories'>Category</a>
+            <div class="input-field col s12 m6" id="catdrop" style="display:none">
+                      <select class="icons">
+                        <option value="" data-icon="assets/img/stock01.jpeg" class=" left circle">Concerts</option>
+                        <option value="" data-icon="assets/img/stock02.jpeg"  class="left circle">Parties</option>
+                        <option value="" data-icon="assets/img/stock03.jpeg" class="left circle">Networking</option>
+                        <option value="" data-icon="assets/img/Eating.jpg" class="left circle">Eating</option>
+                        <option value="" data-icon="assets/img/Political.jpg" class=" left circle">Political</option>
+                        <option value="" data-icon="assets/img/studying.png"  class="left circle">Studying</option>
+                        <option value="" data-icon="assets/img/exercise.jpg" class="left circle">Exercising</option>
+                        <option value="" data-icon="assets/img/yardsale.jpg" class="left circle">For Sale</option>
+                        <option value="" data-icon="assets/img/Uncategorized.png" class="left circle">Uncategorized</option>
+                      </select>
+                      </div>
 
-                <ul id='categories' class='dropdown-content'>
-                    <li><a href="#!">one</a></li>
-                    <li><a href="#!">two</a></li>
-                    <li><a href="#!">three</a></li>
-                    <li><a href="#!"><i class="material-icons">view_module</i>four</a></li>
-                    <li><a href="#!"><i class="material-icons">cloud</i>five</a></li>
-                </ul>
-
-                <a id="beaconCreate" class="btn-floating btn-medium waves-effect waves-light"><i class="material-icons">settings_remote</i></a>
+                <a id="beaconCreate" class="btn-floating btn-medium waves-effect waves-light grey"><i class="material-icons">settings_remote</i></a>
             </div>
         </div>
     </div>
@@ -50,8 +53,8 @@
                         <option data-icon="images/sample-1.jpg" class="circle" value="politcal">Political</option>
                         <option data-icon="images/sample-1.jpg" class="circle" value="social">Social</option>
                         <option data-icon="images/sample-1.jpg" class="circle" value="study">Studying</option>
-                        <option data-icon="images/sample-1.jpg" class="circle" value="uncategorized" selected>Uncategorized</option>
                         <option data-icon="images/sample-1.jpg" class="circle" value="yardsale">Yard Sale</option>
+                        <option data-icon="images/sample-1.jpg" class="circle" value="uncategorized" selected>Uncategorized</option>
                     </select>
                     <label for="category">Category</label>
                 </div>
@@ -75,31 +78,101 @@
                     <label for="female">Allow Women</label>
                 </div>
             </div> -->
-            <button class="btn" id="beaconSubmit" type="submit">Create</button>
+            <button class="btn waves-effect waves-light grey" data-target="modal1" id="beaconSubmit" type="submit">Create</button>
         </form>
     </div>
 
     <div class="beacons">
         <div class="row">
-            <div class="col s12 m4 grey">
-                COLUMN 1
+            <div class="col s12" id="beacon-container">
+                <div class="card hoverable" id="loadingCard" style="display: none">
+                    <div class="card-content">
+                        <span class="card-title">Your Beacon is Being Created</span>
+                        <img src="/assets/img/loading.gif">
+                    </div>
+                </div>
+                {{#each beacon}}
+                    <div class="card hoverable">
+                        <div class="card-content">
+                            <span class="card-title">{{this.name}}
+                                <span class="badge">
+                                    <i class="fa {{this.icon}}" aria-hidden="true"></i>
+                                    {{this.category}}
+                                </span>
+                            </span>
+                            <p>{{this.activity}}</p>
+                            <p><i class="fa fa-map-marker" aria-hidden="true"></i> <a href="https://www.google.com/maps/search/?api=1&query={{this.lat}},{{this.lng}}" target="_blank">{{this.location}}</a></p>
+                            <p>
+                                <i class="fa fa-user-circle" aria-hidden="true"></i>
+                                <a href="/profile/{{User.username}}">{{User.username}}</a>
+                            </p>
+                        </div>
+                        <div id="bar">
+                            <div class="rallies" id="rallies-{{this.id}}">{{this.rallies}} rallies</div>
+                            <div class="riots" id="riots-{{this.id}}">{{this.riots}} riots</div>
+                        </div>
+                        <div class="card-action">
+                            <div id="{{this.id}}">
+                                <span class="rallyBtn" id="rallyBtn-{{this.id}}"><img class="vote-ra" src="/assets/img/icon-rally.svg">Rally</span>
+                                <span class="riotBtn" id="riotBtn-{{this.id}}"><img class="vote-ri" src="/assets/img/icon-riot.svg">Riot</span>
+                            </div>
+                        </div>
+                    </div>
+                {{/each}}
             </div>
-            <div class="col s12 m4 red">
+
+            {{!-- <div class="col s12 m4 red">
                 COLUMN 2
-            </div>
-            <div class="col s12 m4 blue">
-                COLUMN 3
+            </div> --}}
+
+            <div class="col s12 m5 l5"  style="visibility:hidden;">
+                <div id="map"></div>
             </div>
         </div>
     </div>
 </div>
+<script>
+      var map, infoWindow;
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: -34.397, lng: 150.644},
+          zoom: 6
+        });
+        infoWindow = new google.maps.InfoWindow;
+
+        // Try HTML5 geolocation.
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+            var pos = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+
+            infoWindow.setPosition(pos);
+            infoWindow.setContent('Location found.');
+            infoWindow.open(map);
+            map.setCenter(pos);
+          }, function() {
+            handleLocationError(true, infoWindow, map.getCenter());
+          });
+        } else {
+          // Browser doesn't support Geolocation
+          handleLocationError(false, infoWindow, map.getCenter());
+        }
+      }
+
+      function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+        infoWindow.setPosition(pos);
+        infoWindow.setContent(browserHasGeolocation ?
+                              'Error: The Geolocation service failed.' :
+                              'Error: Your browser doesn\'t support geolocation.');
+        infoWindow.open(map);
+      }
+</script>
+
+<script async
+        defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAwORWZDYOjHiXTWvwdeW04ecXeBuM1uqM&callback=initMap">
+</script>
 
 <script src="../assets/js/beacon.js"></script>
-    <script>
-    $('#beaconCreate').on('click', function(event){
-        $('#beaconForm').toggle(400);
-    });
-    $(document).ready(function() {
-        $('select').material_select();
-    });
-</script>

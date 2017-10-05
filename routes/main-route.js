@@ -1,4 +1,5 @@
 var mainController = require('../controllers/main-controller.js');
+var db = require('../models');
 
 module.exports = function(app, passport) {
 
@@ -9,6 +10,8 @@ module.exports = function(app, passport) {
     app.get('/signout', mainController.signout);
     app.get('/explore', isSignedIn, mainController.explore);
     app.get('/profile/:username?', isSignedIn, mainController.profile);
+
+    app.get('/beacon/votes', isSignedIn, mainController.votes);
 
     // POST ROUTES
     app.post('/signup', passport.authenticate('local-signup', {
@@ -22,10 +25,13 @@ module.exports = function(app, passport) {
     }));
 
     app.post("/beacon/new", isSignedIn, mainController.beacon);
+    app.post("/beacon/rally", isSignedIn, mainController.rally);
+    app.post("/beacon/riot", isSignedIn, mainController.riot);
 
     function isSignedIn(req, res, next) {
         if (req.isAuthenticated())
             return next();
         res.redirect('/signin');
     }
+
 }
