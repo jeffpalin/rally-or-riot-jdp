@@ -74,7 +74,8 @@
                     <label for="female">Allow Women</label>
                 </div>
             </div> -->
-            <button class="btn waves-effect waves-light grey" id="beaconSubmit" type="submit">Create</button>
+            <button class="btn waves-effect waves-light grey" id="beaconSubmit" type="submit">
+                <img src="../public/assets/img/loading.gif" id="loading" style="display:none;">Create</button>
         </form>
     </div>
 
@@ -86,7 +87,7 @@
                         <div class="card-content">
                             <span class="card-title">{{this.name}}</span>
                             <p>{{this.activity}}</p>
-                            <p>Location: {{this.location}}</p>
+                            <p>Location: <a href="https://www.google.com/maps/search/?api=1&query={{this.lat}},{{this.lng}}" target="_blank">{{this.location}}</a></p>
                         </div>
                         <div id="bar">
                             <div class="rallies" id="rallies-{{this.id}}">{{this.rallies}} rallies</div>

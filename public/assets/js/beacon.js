@@ -9,6 +9,8 @@ $('#beaconCreate').on('click', function(event){
 
 $('#beaconSubmit').on('click', function(event) {
     event.preventDefault();
+    // $('#beaconForm').toggle();
+    $('#loading').toggle();
     navigator.geolocation.getCurrentPosition(function(position){
         var activity = $('#activity').val().trim();
         var category = $('#category').val().trim();
@@ -53,6 +55,7 @@ function submitBeacon(beacon)
     $.post('/beacon/new', beacon)
     .done(function(data) {
         $('#beaconForm').toggle();
+        $('#loading').toggle();
     });
 }
 
