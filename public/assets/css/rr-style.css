@@ -79,3 +79,15 @@ overflow: none;
     max-height: 45rem;
     overflow: scroll;
 }
+
+@media screen and (max-width: 1260px) {
+    #map {
+        max-width: 31rem;
+    }
+}
+
+@media screen and (max-width: 1060px) {
+    #map {
+        max-width: 25rem;
+    }
+}
