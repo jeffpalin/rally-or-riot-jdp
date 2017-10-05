@@ -156,4 +156,12 @@ nav ul a.active {
       .parallax-container .section {
         width: 100%;
       }
+
+input.select-dropdown {
+    margin-bottom: 0px !important;
+}
+
+#explore-row {
+    margin-bottom: 0px !important;
+}
     

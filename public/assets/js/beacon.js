@@ -140,3 +140,8 @@ $('.riotBtn').on('click', function(event) {
     }
   });
 })();
+
+$('#catbtn').on('click', function(event) {
+    event.preventDefault();
+    $('#catdrop').toggle(400);
+});
