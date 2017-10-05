@@ -28,13 +28,13 @@ exports.explore = function(req, res) {
             user: req.user,
             beacon: beacons,
         }
-        
+
         res.render('explore', beaconObj);
     });
 }
 
 exports.profile = function(req, res) {
-    
+
     db.User.findOne({
         where: {
             username: req.params.username
@@ -55,7 +55,7 @@ exports.profile = function(req, res) {
     }).catch(function(err) {
         res.render(err)
     });
-    
+
 };
 
 exports.beacon = function(req, res) {
@@ -104,6 +104,7 @@ exports.beacon = function(req, res) {
         UserId: req.user.id
     }).then(function(results) {
         // res.redirect('/explore');
+        res.json(results);
     });
 }
 
