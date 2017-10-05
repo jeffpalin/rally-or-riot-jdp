@@ -93,9 +93,18 @@
                 {{#each beacon}}
                     <div class="card hoverable">
                         <div class="card-content">
-                            <span class="card-title">{{this.name}}</span>
+                            <span class="card-title">{{this.name}}
+                                <span class="badge">
+                                    <i class="fa {{this.icon}}" aria-hidden="true"></i>
+                                    {{this.category}}
+                                </span>
+                            </span>
                             <p>{{this.activity}}</p>
-                            <p>Location: <a href="https://www.google.com/maps/search/?api=1&query={{this.lat}},{{this.lng}}" target="_blank">{{this.location}}</a></p>
+                            <p><i class="fa fa-map-marker" aria-hidden="true"></i> <a href="https://www.google.com/maps/search/?api=1&query={{this.lat}},{{this.lng}}" target="_blank">{{this.location}}</a></p>
+                            <p>
+                                <i class="fa fa-user-circle" aria-hidden="true"></i>
+                                <a href="/profile/{{User.username}}">{{User.username}}</a>
+                            </p>
                         </div>
                         <div id="bar">
                             <div class="rallies" id="rallies-{{this.id}}">{{this.rallies}} rallies</div>

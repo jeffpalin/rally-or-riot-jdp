@@ -94,7 +94,7 @@ $('.riotBtn').on('click', function(event) {
     });
 });
 
-//Periodically refresh votes
+// Periodically refresh votes
 (function worker() {
   $.ajax({
     url: 'beacon/votes',
@@ -136,7 +136,7 @@ $('.riotBtn').on('click', function(event) {
         }
     },
     complete: function() {
-      setTimeout(worker, 5000);
+      setTimeout(worker, 500);
     }
   });
 })();
