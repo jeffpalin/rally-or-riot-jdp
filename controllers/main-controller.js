@@ -23,14 +23,13 @@ exports.landing = function(req, res) {
 }
 
 exports.explore = function(req, res) {
-    db.Beacon.findAll({order: [['updatedAt', 'DESC']]}).then(function(result) {
-
+    db.Beacon.findAll({include: [db.User], order: [['updatedAt', 'DESC']]}).then(function(beacons) {
         var beaconObj = {
             user: req.user,
-            beacon: result,
-            location: req.body.location
+            beacon: beacons
         }
 
+        console.log(beaconObj);
         res.render('explore', beaconObj);
     });
 }
@@ -53,8 +52,6 @@ exports.profile = function(req, res) {
 };
 
 exports.beacon = function(req, res) {
-
-    //Get category icon :p
     var icon;
     switch(req.body.category)
     {
@@ -87,7 +84,6 @@ exports.beacon = function(req, res) {
             break;
     }
 
-
     db.Beacon.create({
         user_id: req.user.id,
         name: req.body.name,
@@ -97,7 +93,8 @@ exports.beacon = function(req, res) {
         population: 1,
         lat: req.body.lat,
         lng: req.body.lng,
-        location: req.body.location
+        location: req.body.location,
+        UserId: req.user.id
     }).then(function(results) {
         res.redirect('/explore');
     });

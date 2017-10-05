@@ -33,18 +33,6 @@ module.exports = function(sequelize, DataTypes) {
             allowNull: false,
             defaultValue: 1
         },
-        // ageMin: {
-        //     type: DataTypes.INTEGER,
-        //     allowNull: true
-        // },
-        // ageMax: {
-        //     type: DataTypes.INTEGER,
-        //     allowNull: true
-        // },
-        // gender: {
-        //     type: DataTypes.STRING,
-        //     allowNull: true
-        // },
         lat: {
             type: DataTypes.DECIMAL(16, 6)
         },
@@ -56,5 +44,10 @@ module.exports = function(sequelize, DataTypes) {
             allowNull: false
         }
     });
+
+    Beacon.associate = function(models) {
+        Beacon.belongsTo(models.User);
+    }
+
     return Beacon;
 };

@@ -91,7 +91,11 @@
                                 </span>
                             </span>
                             <p>{{this.activity}}</p>
-                            <p>Location: {{this.location}}</p>
+                            <p><i class="fa fa-map-marker" aria-hidden="true"></i> {{this.location}}</p>
+                            <p>
+                                <i class="fa fa-user-circle" aria-hidden="true"></i>
+                                <a href="/profile/{{User.username}}">{{User.username}}</a>
+                            </p>
                         </div>
                         <div id="bar">
                             <div class="rallies" id="rallies-{{this.id}}">{{this.rallies}} rallies</div>
