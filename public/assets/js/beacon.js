@@ -1,19 +1,43 @@
 //Beacon Creation
 $('#beaconSubmit').on('click', function(event) {
     event.preventDefault();
-
-    var newBeacon = {
-        name: $('#name').val().trim(),
-        activity: $('#activity').val().trim(),
-        category: $('#category').val().trim()
-    };
-
-    submitBeacon(newBeacon);
-
-    $('#name').val('');
-    $('#activity').val('');
-    $('#category').val('');
-    $('#tags').val('');
+    navigator.geolocation.getCurrentPosition(function(position){
+        var activity = $('#activity').val().trim();
+        var category = $('#category').val().trim();
+        var name = $('#name').val().trim();
+      
+        function decodeLocation(position) {
+            var apikey = 'AIzaSyAwORWZDYOjHiXTWvwdeW04ecXeBuM1uqM';
+            var latlng = position.coords.latitude + ',' + position.coords.longitude;
+            var queryURL = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + latlng +
+                            '&result_type=street_address' + '&key=' + apikey;
+            $.ajax({
+                url: queryURL,
+                method: 'GET'
+            }).done(function(response) {
+                for (var i = 0; i < response.results.length; i++) {
+                    var address = response.results[i].formatted_address;
+                    if (address) {
+                        var newBeacon = {
+                            name: name,
+                            activity: activity,
+                            category: category,
+                            lat: position.coords.latitude,
+                            lng: position.coords.longitude,
+                            location: address
+                        };
+                        submitBeacon(newBeacon);
+                        return;
+                    }
+                };
+            });
+        }
+        decodeLocation(position);
+        $('#name').val('');
+        $('#activity').val('');
+        $('#category').val('');
+        $('#tags').val('');
+    });
 });
 
 function submitBeacon(beacon)
@@ -60,26 +84,3 @@ $('.riotBtn').on('click', function(event) {
         $('#riots-'+beaconId).html(newRiot);
     });
 });
-
-// // Beacon Voting
-// function like(){
-// 	likes++;
-// 	calculateBar();
-// }
-// function dislike(){
-// 	dislikes++;
-// 	calculateBar();
-// }
-//
-// //Calculates bar widths
-// function calculateBar(){
-// 	var total = likes+dislikes;
-//
-// 	var percentageLikes=(likes/total)*100;
-// 	var percentageDislikes=(dislikes/total)*100;
-//
-// 	document.getElementById('likes').style.width=percentageLikes.toString()+"%";
-// 	document.getElementById('dislikes').style.width=percentageDislikes.toString()+"%";
-// }
-//
-// calculateBar();
