@@ -26,29 +26,36 @@ exports.explore = function(req, res) {
     db.Beacon.findAll({include: [db.User], order: [['updatedAt', 'DESC']]}).then(function(beacons) {
         var beaconObj = {
             user: req.user,
-            beacon: beacons
+            beacon: beacons,
         }
-
-        console.log(beaconObj);
+        
         res.render('explore', beaconObj);
     });
 }
 
 exports.profile = function(req, res) {
-    var user = {
-        username: req.user.username,
-        profile: req.params.username
-    }
+    
     db.User.findOne({
         where: {
-            username: user.profile
+            username: req.params.username
         }
     }).then(function(result) {
-        user.email = result.email;
-        res.render('profile', {user: user});
+        db.Beacon.findAll({
+            where: {
+                user_id: req.params.username
+            }
+        }).then(function(result) {
+            var user = {
+                username: req.user.username,
+                profile: req.params.username,
+                beacon: result
+            }
+            res.render('profile', {user: user});
+        })
     }).catch(function(err) {
         res.render(err)
     });
+    
 };
 
 exports.beacon = function(req, res) {
@@ -96,7 +103,7 @@ exports.beacon = function(req, res) {
         location: req.body.location,
         UserId: req.user.id
     }).then(function(results) {
-        res.redirect('/explore');
+        // res.redirect('/explore');
     });
 }
 
