@@ -89,11 +89,19 @@
                             <p>Location: {{this.location}}</p>
                         </div>
                         <div class="card-action">
-                            <div class="beacon-votes">
-                                
+                            <div id="bar">
+                        		<div id="rallies-{{this.id}}">{{this.rallies}}</div>
+                        		<div id="riots-{{this.id}}">{{this.riots}}</div>
+                        	</div>
+
+                            <div id="{{this.id}}">
+                                <button class="btn waves-effect waves-light grey rallyBtn">
+                                    <img class="vote-ra" src="/assets/img/icon-rally.svg">Rally
+                                </button>
+                                <button class="btn waves-effect waves-light grey riotBtn">
+                                    <img class="vote-ri" src="/assets/img/icon-riot.svg">Riot
+                                </button>
                             </div>
-                            <a class="black-text" href="#"><img class="vote-ra" src="/assets/img/icon-rally.svg">Rally</a>
-                            <a class="black-text" href="#"><img class="vote-ri" src="/assets/img/icon-riot.svg">Riot</a>
                         </div>
                     </div>
                 {{/each}}

@@ -1,25 +1,14 @@
+//Beacon Creation
 $('#beaconSubmit').on('click', function(event) {
     event.preventDefault();
     navigator.geolocation.getCurrentPosition(function(position){
         var activity = $('#activity').val().trim();
         var category = $('#category').val().trim();
         var name = $('#name').val().trim();
-
-        // var newBeacon = {
-        //     name: $('#name').val().trim(),
-        //     activity: $('#activity').val().trim(),
-        //     category: $('#category').val().trim(),
-        //     lat: position.coords.latitude,
-        //     lng: position.coords.longitude
-        //     // location: address
-        // };
-        
+      
         function decodeLocation(position) {
             var apikey = 'AIzaSyAwORWZDYOjHiXTWvwdeW04ecXeBuM1uqM';
             var latlng = position.coords.latitude + ',' + position.coords.longitude;
-            console.log(position.coords.latitude);
-            console.log(position.coords.longitude);
-            console.log(latlng);
             var queryURL = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + latlng +
                             '&result_type=street_address' + '&key=' + apikey;
             $.ajax({
@@ -29,7 +18,6 @@ $('#beaconSubmit').on('click', function(event) {
                 for (var i = 0; i < response.results.length; i++) {
                     var address = response.results[i].formatted_address;
                     if (address) {
-                        console.log(address);
                         var newBeacon = {
                             name: name,
                             activity: activity,
@@ -38,12 +26,9 @@ $('#beaconSubmit').on('click', function(event) {
                             lng: position.coords.longitude,
                             location: address
                         };
-                        console.log(newBeacon.location);
                         submitBeacon(newBeacon);
                         return;
                     }
-                    
-                    
                 };
             });
         }
@@ -57,30 +42,45 @@ $('#beaconSubmit').on('click', function(event) {
 
 function submitBeacon(beacon)
 {
-    console.log(beacon);
     $.post('/beacon/new', beacon)
-        .done(function(data) {
-            $('#beaconForm').toggle();
-        });
+    .done(function(data) {
+        $('#beaconForm').toggle();
+    });
 }
 
-// function populateLocationWidget(pos) {
-//     var google_places_api_key = 'AIzaSyAwORWZDYOjHiXTWvwdeW04ecXeBuM1uqM';
-//     // Structure URL
-//     var latlng = pos.lat + ',' + pos.lng;
-//     var queryURL = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' +
-//         latlng + '&result_type=street_address' + '&key=' + google_places_api_key;
-//     $.ajax({
-//         url: queryURL,
-//         method: 'GET'
-//     }).done(function (response) {
-//         // Loop through JSON object to retrieve desired response result
-//         for (var i = 0; i < response.results.length; i++) {
-//             // Define address using JSON object
-//             var address = response.results[i].formatted_address;
-//             // Write address to page
-//             $('#location').html(address);
-//         }
-//     });
-// }
+//Beacon Voting
+$('.rallyBtn').on('click', function(event) {
+    event.preventDefault();
 
+    var beaconId = $(this).parent().attr('id');
+    var rallyCount = $('#rallies-'+beaconId).html();
+    var newRally = parseInt(rallyCount) + 1;
+
+    var beaconRally = {
+        id: beaconId,
+        rallies: newRally
+    }
+
+    $.post('/beacon/rally', beaconRally)
+    .done(function(data) {
+        $('#rallies-'+beaconId).html(newRally);
+    });
+});
+
+$('.riotBtn').on('click', function(event) {
+    event.preventDefault();
+
+    var beaconId = $(this).parent().attr('id');
+    var riotCount = $('#riots-'+beaconId).html();
+    var newRiot = parseInt(riotCount) + 1;
+
+    var beaconRiot = {
+        id: beaconId,
+        riots: newRiot
+    }
+
+    $.post('/beacon/riot', beaconRiot)
+    .done(function(data) {
+        $('#riots-'+beaconId).html(newRiot);
+    });
+});
