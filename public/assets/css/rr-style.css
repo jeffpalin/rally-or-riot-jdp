@@ -28,7 +28,7 @@ main {
 }
 
 nav {
-      background: linear-gradient(225deg, #e14b31, #2cd1df);
+      background: linear-gradient(225deg, #e14b31, #DB2D1D, #2cd1df, #2980b9);
       background-size: 300% 300%;
       box-sizing: border-box;
       display: table;
@@ -97,3 +97,15 @@ nav ul a.active {
         max-width: 25rem;
     }
 }
+
+
+.parallax-container {
+      min-height: 380px;
+      line-height: 0;
+      height: auto;
+      color: rgba(255,255,255,.9);
+    }
+      .parallax-container .section {
+        width: 100%;
+      }
+    
