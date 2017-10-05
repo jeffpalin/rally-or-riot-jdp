@@ -67,6 +67,12 @@ exports.beacon = function(req, res) {
     });
 }
 
+exports.votes = function(req, res) {
+    db.Beacon.findAll({attributes: ['id', 'rallies', 'riots']}).then(function(beacons) {
+        res.json(beacons);
+    });
+}
+
 exports.rally = function(req, res) {
     db.Beacon
     .findOne({ where: { id: req.body.id } })

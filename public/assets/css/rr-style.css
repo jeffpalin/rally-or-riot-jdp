@@ -69,7 +69,30 @@ nav ul a.active {
 .vote-ra,
 .vote-ri
 {
-    max-width: 20px;
+     max-width: 20px;
+}
+
+#bar
+{
+    padding-bottom: 20px;
+}
+
+.rallies
+{
+    width: 50%;
+    padding: 0 10px 0px 10px;
+    background: #3498db;
+    color: #fff;
+    float: left;
+}
+
+.riots
+{
+	width: 50%;
+    padding: 0 10px 0px 10px;
+	background: #e74c3c;
+    color: #fff;
+	float: right;
 }
 
 #map {

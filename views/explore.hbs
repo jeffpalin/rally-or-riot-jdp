@@ -88,12 +88,11 @@
                             <p>{{this.activity}}</p>
                             <p>Location: {{this.location}}</p>
                         </div>
+                        <div id="bar">
+                            <div class="rallies" id="rallies-{{this.id}}">{{this.rallies}} rallies</div>
+                            <div class="riots" id="riots-{{this.id}}">{{this.riots}} riots</div>
+                        </div>
                         <div class="card-action">
-                            <div id="bar">
-                        		<div id="rallies-{{this.id}}">{{this.rallies}}</div>
-                        		<div id="riots-{{this.id}}">{{this.riots}}</div>
-                        	</div>
-
                             <div id="{{this.id}}">
                                 {{#if this.canRally}}
                                     <button class="btn waves-effect waves-light grey rallyBtn">
@@ -131,10 +130,6 @@
     </div>
 </div>
 <script>
-      // Note: This example requires that you consent to location sharing when
-      // prompted by your browser. If you see the error "The Geolocation service
-      // failed.", it means you probably did not give permission for the browser to
-      // locate you.
       var map, infoWindow;
       function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
@@ -171,17 +166,11 @@
                               'Error: Your browser doesn\'t support geolocation.');
         infoWindow.open(map);
       }
-    </script>
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAwORWZDYOjHiXTWvwdeW04ecXeBuM1uqM&callback=initMap">
-    </script>
+</script>
+
+<script async
+        defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAwORWZDYOjHiXTWvwdeW04ecXeBuM1uqM&callback=initMap">
+</script>
 
 <script src="../assets/js/beacon.js"></script>
-    <script>
-    $('#beaconCreate').on('click', function(event){
-        $('#beaconForm').toggle(400);
-    });
-    $('document').ready(function() {
-        $('select').material_select();
-    });
-</script>
