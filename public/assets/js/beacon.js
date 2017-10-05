@@ -133,7 +133,7 @@ $('.riotBtn').on('click', function(event) {
         }
     },
     complete: function() {
-      setTimeout(worker, 5000);
+      setTimeout(worker, 500);
     }
   });
 })();

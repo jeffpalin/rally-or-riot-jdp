@@ -53,11 +53,47 @@ exports.profile = function(req, res) {
 };
 
 exports.beacon = function(req, res) {
+
+    //Get category icon :p
+    var icon;
+    switch(req.body.category)
+    {
+        case 'concert':
+            icon = 'fa-music';
+            break;
+        case 'exercise':
+            icon = 'fa-bicycle';
+            break;
+        case 'food':
+            icon = 'fa-cutlery';
+            break;
+        case 'party':
+            icon = 'fa-glass';
+            break;
+        case 'political':
+            icon = 'fa-gavel';
+            break;
+        case 'social':
+            icon = 'fa-comment';
+            break;
+        case 'study':
+            icon = 'fa-graduation-cap';
+            break;
+        case 'uncategorized':
+            icon = 'fa-folder-open';
+            break;
+        case 'yardsale':
+            icon = 'fa-money';
+            break;
+    }
+
+
     db.Beacon.create({
         user_id: req.user.id,
         name: req.body.name,
         activity: req.body.activity,
         category: req.body.category,
+        icon: icon,
         population: 1,
         lat: req.body.lat,
         lng: req.body.lng,

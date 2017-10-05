@@ -84,7 +84,12 @@
                 {{#each beacon}}
                     <div class="card hoverable">
                         <div class="card-content">
-                            <span class="card-title">{{this.name}}</span>
+                            <span class="card-title">{{this.name}}
+                                <span class="badge">
+                                    <i class="fa {{this.icon}}" aria-hidden="true"></i>
+                                    {{this.category}}
+                                </span>
+                            </span>
                             <p>{{this.activity}}</p>
                             <p>Location: {{this.location}}</p>
                         </div>
