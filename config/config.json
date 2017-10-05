@@ -1,8 +1,8 @@
 {
   "development": {
     "username": "root",
-    "password": "xjW2sZGg6YEX72vU3e",
-    "database": "rrdev",
+    "password": "poopers",
+    "database": "ror_db",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
