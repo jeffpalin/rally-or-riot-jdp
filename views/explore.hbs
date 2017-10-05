@@ -94,17 +94,8 @@
                         </div>
                         <div class="card-action">
                             <div id="{{this.id}}">
-                                {{#if this.canRally}}
-                                    <span class="rallyBtn"><img class="vote-ra" src="/assets/img/icon-rally.svg">Rally</span> 
-                                {{^}}
-                                    <span class="rallyBtn"><img class="vote-ra" src="/assets/img/icon-rally.svg">Rally</span>
-                                {{/if}}
-
-                                {{#if this.canRiot}}
-                                    <span class="riotBtn"><img class="vote-ri" src="/assets/img/icon-riot.svg">Riot</span>
-                                {{^}}
-                                    <span class="riotBtn"><img class="vote-ri" src="/assets/img/icon-riot.svg">Riot</span>
-                                {{/if}}
+                                <span class="rallyBtn" id="rallyBtn-{{this.id}}"><img class="vote-ra" src="/assets/img/icon-rally.svg">Rally</span>
+                                <span class="riotBtn" id="riotBtn-{{this.id}}"><img class="vote-ri" src="/assets/img/icon-riot.svg">Riot</span>
                             </div>
                         </div>
                     </div>

@@ -64,10 +64,12 @@ $('.rallyBtn').on('click', function(event) {
         id: $(this).parent().attr('id')
     }
 
+    $('#rallyBtn-'+newVote.id).css('color', '#3498db');
+    $('#riotBtn-'+newVote.id).css('color', '#000');
+
     $.post('/beacon/rally', newVote)
     .done(function(data) {
-        let currentCount = $('#rallies-'+newVote.id).val();
-        $('#rallies-'+newVote.id).text(currentCount+1);
+        console.log('Posted: ' + data);
     });
 });
 
@@ -78,29 +80,23 @@ $('.riotBtn').on('click', function(event) {
         id: $(this).parent().attr('id')
     }
 
+    let currentCount = $('#riots-'+newVote.id).val();
+
+    $('#riotBtn-'+newVote.id).css('color', '#e74c3c');
+    $('#rallyBtn-'+newVote.id).css('color', '#000');
+
     $.post('/beacon/riot', newVote)
     .done(function(data) {
-        let currentCount = $('#riots-'+newVote.id).val();
-        $('#riots-'+newVote.id).text(currentCount+1);
+        console.log('Posted: ' + data);
     });
 });
-
-+// function calculateBar(){
- +// 	var total = likes+dislikes;
- +//
- +// 	var percentageLikes=(likes/total)*100;
- +// 	var percentageDislikes=(dislikes/total)*100;
- +//
- +// 	document.getElementById('likes').style.width=percentageLikes.toString()+"%";
- +// 	document.getElementById('dislikes').style.width=percentageDislikes.toString()+"%";
- +// }
 
 //Periodically refresh votes
 (function worker() {
   $.ajax({
     url: 'beacon/votes',
-    success: function(beacons) {
-        for(let beacon of beacons)
+    success: function(response) {
+        for(let beacon of response.beacons)
         {
             var rallies = beacon.rallies;
             var riots = beacon.riots;
@@ -112,27 +108,27 @@ $('.riotBtn').on('click', function(event) {
 
             $('#rallies-'+beacon.id).css('width', percRallies.toString()+'%');
             $('#riots-'+beacon.id).css('width', percRiots.toString()+'%');
-
-            //Update vote count
             $('#rallies-'+beacon.id).text(beacon.rallies + ' rallies');
             $('#riots-'+beacon.id).text(beacon.riots + ' riots');
 
             //Only render votes with real numbers
-            if(rallies === 0 || rallies == null)
-            {
-                $('#rallies-'+beacon.id).css('display', 'none');
-            }
-            else{
-                $('#rallies-'+beacon.id).css('display', 'block');
+            if(rallies === 0 || rallies == null){$('#rallies-'+beacon.id).css('display', 'none');}
+            else{$('#rallies-'+beacon.id).css('display', 'block');}
 
-            }
+            if(riots === 0 || riots == null){$('#riots-'+beacon.id).css('display', 'none');}
+            else{$('#riots-'+beacon.id).css('display', 'block');}
+        }
 
-            if(riots === 0 || riots == null)
-            {
-                $('#riots-'+beacon.id).css('display', 'none');
+        //Display already voted items as 'voted'
+        for(let vote of response.votes)
+        {
+            if(vote.canRally && !vote.canRiot){
+                $('#riotBtn-'+vote.beacon_id).css('color', '#e74c3c');
+                $('#rallyBtn-'+vote.beacon_id).css('color', '#000');
             }
-            else{
-                $('#riots-'+beacon.id).css('display', 'block');
+            else if(vote.canRiot && !vote.canRally){
+                $('#rallyBtn-'+vote.beacon_id).css('color', '#3498db');
+                $('#riotBtn-'+vote.beacon_id).css('color', '#000');
             }
         }
     },

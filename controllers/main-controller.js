@@ -69,7 +69,14 @@ exports.beacon = function(req, res) {
 
 exports.votes = function(req, res) {
     db.Beacon.findAll({attributes: ['id', 'rallies', 'riots']}).then(function(beacons) {
-        res.json(beacons);
+        db.Vote.findAll({attributes: ['beacon_id', 'canRally', 'canRiot'], where: {user_id: req.user.id}})
+        .then(function(votes) {
+            var response = {
+                beacons: beacons,
+                votes: votes
+            }
+            res.json(response);
+        });
     });
 }
 
