@@ -172,3 +172,8 @@ nav ul a.active {
 input.select-dropdown {
     margin-bottom: 0px !important;
 }
+
+@media screen and (min-width: 0px) and (max-width: 600px) {
+  #map { display: none; }
+  .mobile-hide{ display: none; }
+}
