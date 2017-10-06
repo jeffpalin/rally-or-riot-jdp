@@ -7,6 +7,8 @@ $('#beaconCreate').on('click', function(event){
     $('#beaconForm').toggle(400);
 });
 
+
+
 $('#beaconSubmit').on('click', function(event) {
     event.preventDefault();
     $('#loadingCard').toggle(400);

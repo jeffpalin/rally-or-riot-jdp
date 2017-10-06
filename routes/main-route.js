@@ -10,7 +10,7 @@ module.exports = function(app, passport) {
     app.get('/signout', mainController.signout);
     app.get('/explore', isSignedIn, mainController.explore);
     app.get('/profile/:username?', isSignedIn, mainController.profile);
-
+    app.get('/beacon/category/:category', isSignedIn, mainController.categories);
     app.get('/beacon/votes', isSignedIn, mainController.votes);
 
     // POST ROUTES

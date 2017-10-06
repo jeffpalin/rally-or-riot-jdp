@@ -1,27 +1,19 @@
-/********************************************************************************
-      ."".    ."",       ____        ____                       ____  _       __
-      |  |   /  /       / __ \____ _/ / /_  __   ____  _____   / __ \(_)___  / /_
-      |  |  /  /       / /_/ / __ `/ / / / / /  / __ \/ ___/  / /_/ / / __ \/ __/
-      |  | /  /       / _, _/ /_/ / / / /_/ /  / /_/ / /     / _, _/ / /_/ / /_
-      |  |/  ;-._    /_/ |_|\__,_/_/_/\__, /   \____/_/     /_/ |_/_/\____/\__/
-      }  ` _/  / ;                   /____/
-      |  /` ) /  /
-      | /  /_/\_/\   (c) 2017 Rally or Riot
-      |/  /      |   Project authored by:
-      (  ' \ '-  |   - Dayton Mills
-       \    `.  /    - Jeanelle Sebastion
-        |      |     - Jeff Palin
-        |      |     - Nick Saponaro
-        |      |     - Rowinn Dionisio
-
-        FILE: rr-style.css - Global stylesheet for Rally or Riot project
-
-*******************************************************************************/
 body {
-      display: flex;
-      min-height: 100vh;
-      flex-direction: column;
-    }
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+.footpush {
+    height: 155px;
+}
+
+
+page-footer {
+    bottom: 0;
+    position: fixed;
+    height: 155px;
+}
 
 main {
       flex: 1 0 auto;
@@ -63,8 +55,12 @@ nav ul a.active {
 }
 
 #beacon-container {
-    max-height: 45rem;
+    max-height: 80rem;
     overflow: scroll;
+}
+
+::-webkit-scrollbar {
+    display: none;
 }
 
 .beacons {
