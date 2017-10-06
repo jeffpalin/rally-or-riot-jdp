@@ -5,174 +5,165 @@
                 <p>
                     <h5>Welcome Back, <a href="profile/{{user.username}}">{{user.username}}</a>!</h5>
                     <h6>Find Your Next Rally or Riot!</h6></span>
+                    <a id="beaconCreate" class="btn-floating btn-medium waves-effect waves-light grey"><i class="material-icons">settings_remote</i></a>
                 </p>
             </div>
             <a class='btn grey' id="catbtn" data-beloworigin="true" href='#' data-activates='categories'>Category</a>
             <div class="input-field col s12 m6" id="catdrop" style="display:none">
-                      <select class="icons">
-                        <option value="" data-icon="assets/img/stock01.jpeg" class=" left circle">Concerts</option>
-                        <option value="" data-icon="assets/img/stock02.jpeg"  class="left circle">Parties</option>
-                        <option value="" data-icon="assets/img/stock03.jpeg" class="left circle">Networking</option>
-                        <option value="" data-icon="assets/img/Eating.jpg" class="left circle">Eating</option>
-                        <option value="" data-icon="assets/img/Political.jpg" class=" left circle">Political</option>
-                        <option value="" data-icon="assets/img/studying.png"  class="left circle">Studying</option>
-                        <option value="" data-icon="assets/img/exercise.jpg" class="left circle">Exercising</option>
-                        <option value="" data-icon="assets/img/yardsale.jpg" class="left circle">For Sale</option>
-                        <option value="" data-icon="assets/img/Uncategorized.png" class="left circle">Uncategorized</option>
-                      </select>
-                      </div>
-
-                <a id="beaconCreate" class="btn-floating btn-medium waves-effect waves-light grey"><i class="material-icons">settings_remote</i></a>
+                <select class="icons" onchange="location = this.value">
+                    <option id="concert" value="/beacon/category/concert" data-icon="/assets/img/categories/music.svg" class="left">Concerts</option>
+                    <option id="exercising" value="/beacon/category/exercise" data-icon="/assets/img/categories/bicycle.svg" class="left">Exercising</option>
+                    <option id="eating" value="/beacon/category/food" data-icon="/assets/img/categories/cutlery.svg" class="left">Eating</option>
+                    <option id="parties" value="/beacon/category/party" data-icon="/assets/img/categories/music.svg"  class="left">Parties</option>
+                    <option id="political" value="/beacon/category/political" data-icon="/assets/img/categories/gavel.svg" class="left">Political</option>
+                    <option id="networking" value="/beacon/category/social" data-icon="/assets/img/categories/comment.svg" class="left">Social</option>
+                    <option id="studying" value="/beacon/category/study" data-icon="/assets/img/categories/graduation-cap.svg"  class="left">Studying</option>
+                    <option id="uncategorized" value="/beacon/category/uncategorized" data-icon="/assets/img/categories/folder-open.svg" class="left">Other</option>
+                    <option id="forSale" value="/beacon/category/yardsale" data-icon="/assets/img/categories/money.svg" class="left">For Sale</option>
+                </select>
             </div>
         </div>
     </div>
 </div>
+</div>
 
 <div class="container">
-    <div id="beaconForm" style="display:none">
-        <form>
-            <div class="row">
-                <div class="input-field col s6">
-                    <input placeholder="Enter a creative title" id="name" type="text" class="validate">
-                    <label for="name">Beacon Name</label>
-                </div>
+    <div class="row">
+        <div id="beaconForm" style="display:none" class="col s12 m6 l6">
+                <form>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input placeholder="Enter a creative title" id="name" type="text" class="validate">
+                            <label for="name">Beacon Name</label>
+                        </div>
 
-                <div class="input-field col s6">
-                    <input placeholder="What are you doing here?" id="activity" type="text" class="validate">
-                    <label for="activity">Activity</label>
-                </div>
-            </div>
+                        <div class="input-field col s6">
+                            <input placeholder="What are you doing here?" id="activity" type="text" class="validate">
+                            <label for="activity">Activity</label>
+                        </div>
+                    </div>
 
-            <div class="row">
-                <div class="input-field col s6">
-                    <select id="category" name="category">
-                        <option data-icon="images/sample-1.jpg" class="circle" value="concert">Concerts</option>
-                        <option data-icon="images/sample-1.jpg" class="circle" value="exercise">Exercising</option>
-                        <option data-icon="images/sample-1.jpg" class="circle" value="food">Eating</option>
-                        <option data-icon="images/sample-1.jpg" class="circle" value="party">Parties</option>
-                        <option data-icon="images/sample-1.jpg" class="circle" value="politcal">Political</option>
-                        <option data-icon="images/sample-1.jpg" class="circle" value="social">Social</option>
-                        <option data-icon="images/sample-1.jpg" class="circle" value="study">Studying</option>
-                        <option data-icon="images/sample-1.jpg" class="circle" value="yardsale">Yard Sale</option>
-                        <option data-icon="images/sample-1.jpg" class="circle" value="uncategorized" selected>Uncategorized</option>
-                    </select>
-                    <label for="category">Category</label>
-                </div>
-
-                <!-- TODO: Beacon Tags -->
-                <div class="input-field col s6">
-                    <input placeholder="Yoga, Movies, Tailgating" id="tags" type="text" class="validate">
-                    <label for="tags">Tags (seperate by comma)</label>
-                </div>
-            </div>
-
-            <!-- TODO: Beacon Demographics <div class="row">
-                <div class="input-field col s6">
-                    <div id="ages"></div>
-                    <label for="ages">Age Group</label>
-                </div>
-                <div class="input-field col s6">
-                    <input type="checkbox" class="filled-in" id="male" value="male"/>
-                    <label for="male">Allow Men</label>
-                    <input type="checkbox" class="filled-in" id="female" value="female"/>
-                    <label for="female">Allow Women</label>
-                </div>
-            </div> -->
-            <button class="btn waves-effect waves-light grey" data-target="modal1" id="beaconSubmit" type="submit">Create</button>
-        </form>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <select id="category" name="category">
+                                <option id="concert" value="concert" data-icon="/assets/img/categories/music.svg" class="left">Concerts</option>
+                                <option id="exercising" value="exercise" data-icon="/assets/img/categories/bicycle.svg" class="left">Exercising</option>
+                                <option id="eating" value="food" data-icon="/assets/img/categories/cutlery.svg" class="left">Eating</option>
+                                <option id="parties" value="party" data-icon="/assets/img/categories/music.svg"  class="left">Parties</option>
+                                <option id="political" value="political" data-icon="/assets/img/categories/gavel.svg" class="left">Political</option>
+                                <option id="networking" value="social" data-icon="/assets/img/categories/comment.svg" class="left">Social</option>
+                                <option id="studying" value="study" data-icon="/assets/img/categories/graduation-cap.svg"  class="left">Studying</option>
+                                <option id="uncategorized" value="uncategorized" data-icon="/assets/img/categories/folder-open.svg" class="left">Other</option>
+                                <option id="forSale" value="yardsale" data-icon="/assets/img/categories/money.svg" class="left">For Sale</option>
+                            </select>
+                            <label for="category">Category</label>
+                        </div>
+                        <button class="btn waves-effect waves-light grey" data-target="modal1" id="beaconSubmit" type="submit">Create</button>
+                    </div>
+                </form>
+        </div>
     </div>
-
     <div class="beacons">
         <div class="row">
-            <div class="col s12" id="beacon-container">
+            <div class="col s12 m6 l6" id="beacon-container">
                 <div class="card hoverable" id="loadingCard" style="display: none">
                     <div class="card-content">
-                        <span class="card-title">Your Beacon is Being Created</span>
-                        <img src="/assets/img/loading.gif">
+                        <span class="card-title">Powering up beacon...</span>
+                        <img style="width: 25%" src="/assets/img/loading.gif">
                     </div>
                 </div>
                 {{#each beacon}}
-                    <div class="card hoverable">
-                        <div class="card-content">
-                            <span class="card-title">{{this.name}}
-                                <span class="badge">
-                                    <i class="fa {{this.icon}}" aria-hidden="true"></i>
-                                    {{this.category}}
-                                </span>
+                <div class="card hoverable" id="beacon-{{this.id}}">
+                    <div class="card-content">
+                        <span class="card-title">{{this.name}}
+                            <span class="badge">
+                                <i class="fa {{this.icon}}" aria-hidden="true"></i>
+                                {{this.category}}
                             </span>
-                            <p>{{this.activity}}</p>
-                            <p><i class="fa fa-map-marker" aria-hidden="true"></i> <a href="https://www.google.com/maps/search/?api=1&query={{this.lat}},{{this.lng}}" target="_blank">{{this.location}}</a></p>
-                            <p>
-                                <i class="fa fa-user-circle" aria-hidden="true"></i>
-                                <a href="/profile/{{User.username}}">{{User.username}}</a>
-                            </p>
-                        </div>
-                        <div id="bar">
-                            <div class="rallies" id="rallies-{{this.id}}">{{this.rallies}} rallies</div>
-                            <div class="riots" id="riots-{{this.id}}">{{this.riots}} riots</div>
-                        </div>
-                        <div class="card-action">
-                            <div id="{{this.id}}">
-                                <span class="rallyBtn" id="rallyBtn-{{this.id}}"><img class="vote-ra" src="/assets/img/icon-rally.svg">Rally</span>
-                                <span class="riotBtn" id="riotBtn-{{this.id}}"><img class="vote-ri" src="/assets/img/icon-riot.svg">Riot</span>
-                            </div>
+                        </span>
+                        <p>{{this.activity}}</p>
+                        <p><i class="fa fa-map-marker" aria-hidden="true"></i> <a href="https://www.google.com/maps/search/?api=1&query={{this.lat}},{{this.lng}}" target="_blank">{{this.location}}</a></p>
+                        <p>
+                            <i class="fa fa-user-circle" aria-hidden="true"></i>
+                            <a href="/profile/{{User.username}}">{{User.username}}</a>
+                        </p>
+                    </div>
+                    <div id="bar">
+                        <div class="rallies" id="rallies-{{this.id}}">{{this.rallies}} rallies</div>
+                        <div class="riots" id="riots-{{this.id}}">{{this.riots}} riots</div>
+                    </div>
+                    <div class="card-action">
+                        <div id="{{this.id}}">
+                            <span class="rallyBtn" id="rallyBtn-{{this.id}}"><img class="vote-ra" src="/assets/img/icon-rally.svg">Rally</span>
+                            <span class="riotBtn" id="riotBtn-{{this.id}}"><img class="vote-ri" src="/assets/img/icon-riot.svg">Riot</span>
                         </div>
                     </div>
+                </div>
                 {{/each}}
             </div>
-
-            {{!-- <div class="col s12 m4 red">
-                COLUMN 2
-            </div> --}}
-
-            <div class="col s12 m5 l5"  style="visibility:hidden;">
+            <div class="col s12 m6 l6">
                 <div id="map"></div>
             </div>
         </div>
     </div>
 </div>
 <script>
-      var map, infoWindow;
-      function initMap() {
-        map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: -34.397, lng: 150.644},
-          zoom: 6
-        });
-        infoWindow = new google.maps.InfoWindow;
+var map, infoWindow;
+function initMap() {
+    map = new google.maps.Map(document.getElementById('map'), {
+        center: {lat: -34.397, lng: 150.644},
+        zoom: 6
+    });
+    infoWindow = new google.maps.InfoWindow;
 
-        // Try HTML5 geolocation.
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(function(position) {
+    // Try HTML5 geolocation.
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
             var pos = {
-              lat: position.coords.latitude,
-              lng: position.coords.longitude
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
             };
 
             infoWindow.setPosition(pos);
             infoWindow.setContent('Location found.');
             infoWindow.open(map);
             map.setCenter(pos);
-          }, function() {
+        }, function() {
             handleLocationError(true, infoWindow, map.getCenter());
-          });
-        } else {
-          // Browser doesn't support Geolocation
-          handleLocationError(false, infoWindow, map.getCenter());
-        }
-      }
+        });
+    } else {
+        // Browser doesn't support Geolocation
+        handleLocationError(false, infoWindow, map.getCenter());
+    }
+}
 
-      function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-        infoWindow.setPosition(pos);
-        infoWindow.setContent(browserHasGeolocation ?
-                              'Error: The Geolocation service failed.' :
-                              'Error: Your browser doesn\'t support geolocation.');
+function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+    infoWindow.setPosition(pos);
+    infoWindow.setContent(browserHasGeolocation ?
+        'Error: The Geolocation service failed.' :
+        'Error: Your browser doesn\'t support geolocation.');
         infoWindow.open(map);
-      }
-</script>
+    }
+    </script>
 
-<script async
-        defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAwORWZDYOjHiXTWvwdeW04ecXeBuM1uqM&callback=initMap">
-</script>
+    <script async
+    defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAwORWZDYOjHiXTWvwdeW04ecXeBuM1uqM&callback=initMap">
+    </script>
 
-<script src="../assets/js/beacon.js"></script>
+    <!-- Dayton's Magic Map -->
+    <script>
+    $(document).ready(function() {
+        $(window).scroll(function() {
+            var headerH = 225;
+            var scrollVal = $(this).scrollTop();
+            if ( scrollVal > headerH ) {
+                $('#map').css({'position':'fixed','top' :'10px'});
+            } else {
+                $('#map').css({'position':'absolute','top':'225px'});
+            }
+        });
+    });
+    </script>
+
+    <script src="/assets/js/beacon.js"></script>

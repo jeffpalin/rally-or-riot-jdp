@@ -33,23 +33,40 @@ exports.explore = function(req, res) {
     });
 }
 
+exports.categories = function(req, res) {
+    db.Beacon.findAll({
+        include: [db.User],
+        order: [['updatedAt', 'DESC']],
+        where: {
+            category: req.params.category
+        }
+    }).then(function(beacons) {
+       var beaconObj = {
+           user: req.user,
+           beacon: beacons
+       }
+       res.render('explore', beaconObj);
+    });
+};
+
 exports.profile = function(req, res) {
     db.User.findOne({
         where: {
             username: req.params.username
         }
-    }).then(function(result) {
+    }).then(function(user) {
         db.Beacon.findAll({
             where: {
-                user_id: req.params.username
+                user_id: user.id
             }
-        }).then(function(result) {
-            var user = {
-                username: req.user.username,
-                profile: req.params.username,
-                beacon: result
+        }).then(function(beacons) {
+            var profileObj = {
+                user: req.user,
+                profile: user,
+                beacon: beacons
             }
-            res.render('profile', {user: user});
+            console.log(profileObj);
+            res.render('profile', profileObj);
         })
     }).catch(function(err) {
         res.render(err)
@@ -101,7 +118,6 @@ exports.beacon = function(req, res) {
         location: req.body.location,
         UserId: req.user.id
     }).then(function(results) {
-        // res.redirect('/explore');
         res.json(results);
     });
 }
