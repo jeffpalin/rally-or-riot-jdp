@@ -56,6 +56,22 @@ exports.profile = function(req, res) {
     });
 };
 
+exports.categories = function(req, res) {
+    db.Beacon.findAll({
+        include: [db.User], 
+        order: [['updatedAt', 'DESC']],
+        where: {
+            category: req.params.category
+        }
+    }).then(function(beacons) {
+       var beaconObj = {
+           user: req.user,
+           beacon: beacons
+       }
+       res.render('explore', beaconObj);
+    });
+};
+
 exports.beacon = function(req, res) {
     var icon;
     switch(req.body.category)

@@ -9,16 +9,16 @@
             </div>
             <a class='btn grey' id="catbtn" data-beloworigin="true" href='#' data-activates='categories'>Category</a>
             <div class="input-field col s12 m6" id="catdrop" style="display:none">
-                      <select class="icons">
-                        <option value="" data-icon="assets/img/stock01.jpeg" class=" left circle">Concerts</option>
-                        <option value="" data-icon="assets/img/stock02.jpeg"  class="left circle">Parties</option>
-                        <option value="" data-icon="assets/img/stock03.jpeg" class="left circle">Networking</option>
-                        <option value="" data-icon="assets/img/Eating.jpg" class="left circle">Eating</option>
-                        <option value="" data-icon="assets/img/Political.jpg" class=" left circle">Political</option>
-                        <option value="" data-icon="assets/img/studying.png"  class="left circle">Studying</option>
-                        <option value="" data-icon="assets/img/exercise.jpg" class="left circle">Exercising</option>
-                        <option value="" data-icon="assets/img/yardsale.jpg" class="left circle">For Sale</option>
-                        <option value="" data-icon="assets/img/Uncategorized.png" class="left circle">Uncategorized</option>
+                      <select class="icons" onchange="location = this.value">
+                        <option id="concert" value="/beacon/category/concert" data-icon="assets/img/stock01.jpeg" class="left circle">Concerts</option>
+                        <option id="parties" value="/beacon/category/party" data-icon="assets/img/stock02.jpeg"  class="left circle">Parties</option>
+                        <option id="networking" value="/beacon/category/networking" data-icon="assets/img/stock03.jpeg" class="left circle">Networking</option>
+                        <option id="eating" value="/beacon/category/eating" data-icon="assets/img/Eating.jpg" class="left circle">Eating</option>
+                        <option id="political" value="/beacon/category/political" data-icon="assets/img/Political.jpg" class="left circle">Political</option>
+                        <option id="studying" value="/beacon/category/studying" data-icon="assets/img/studying.png"  class="left circle">Studying</option>
+                        <option id="exercising" value="/beacon/category/exercising" data-icon="assets/img/exercise.jpg" class="left circle">Exercising</option>
+                        <option id="forSale" value="/beacon/category/yardsale" data-icon="assets/img/yardsale.jpg" class="left circle">For Sale</option>
+                        <option id="uncategorized" value="/beacon/category/uncategorized" data-icon="assets/img/Uncategorized.png" class="left circle">Uncategorized</option>
                       </select>
                       </div>
 
@@ -92,7 +92,7 @@
                     </div>
                 </div>
                 {{#each beacon}}
-                    <div class="card hoverable">
+                    <div class="card hoverable" id="beacon-{{this.id}}">
                         <div class="card-content">
                             <span class="card-title">{{this.name}}
                                 <span class="badge">
