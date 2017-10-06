@@ -7,8 +7,6 @@ $('#beaconCreate').on('click', function(event){
     $('#beaconForm').toggle(400);
 });
 
-
-
 $('#beaconSubmit').on('click', function(event) {
     event.preventDefault();
     $('#loadingCard').toggle(400);
@@ -99,7 +97,7 @@ $('.riotBtn').on('click', function(event) {
 // Periodically refresh votes
 (function worker() {
   $.ajax({
-    url: 'beacon/votes',
+    url: '/beacon/votes',
     success: function(response) {
         for(let beacon of response.beacons)
         {
@@ -138,7 +136,7 @@ $('.riotBtn').on('click', function(event) {
         }
     },
     complete: function() {
-      setTimeout(worker, 500);
+      setTimeout(worker, 1000);
     }
   });
 })();

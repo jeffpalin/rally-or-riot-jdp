@@ -1,3 +1,4 @@
+/* Layout Section */
 body {
     display: flex;
     min-height: 100vh;
@@ -5,14 +6,13 @@ body {
 }
 
 .footpush {
-    height: 155px;
+    height: 50px;
 }
-
 
 page-footer {
     bottom: 0;
     position: fixed;
-    height: 155px;
+    height: 50px;
 }
 
 main {
@@ -20,30 +20,23 @@ main {
 }
 
 nav {
-      background: linear-gradient(225deg, #e14b31, #DB2D1D, #2cd1df, #2980b9);
-      background-size: 300% 300%;
-      box-sizing: border-box;
-      display: table;
-      margin: 0;
-      -webkit-animation: Rainbow 5s ease infinite;
-      -moz-animation: Rainbow 5s ease infinite;
-      animation: Rainbow 5s ease infinite;
-    }
+    background: linear-gradient(to right, rgba(231,77,60,1) 0%, rgba(231,77,60,1) 50%, rgba(52,152,219,1) 50%, rgba(52,152,219,1) 100%);
+    box-sizing: border-box;
+    display: table;
+    margin: 0;
+}
+
+#logo-container
+{
+    font-size: 4rem;
+}
 
 nav ul a.active {
       background-color: rgba(0,0,0,0.1);
 }
 
 
-    @-webkit-keyframes Rainbow {
-      0% {
-        background-position: 94% 0%; }
-      50% {
-        background-position: 7% 100%; }
-      100% {
-        background-position: 94% 0%; }
-    }
-
+/* Explore Section */
 .explore-bar {
     padding-top: 1rem;
     padding-bottom: 1rem;
@@ -54,19 +47,42 @@ nav ul a.active {
     margin: 0;
 }
 
-#beacon-container {
-    max-height: 80rem;
-    overflow: scroll;
+#explore-row {
+    margin-bottom: 0px !important;
 }
 
-::-webkit-scrollbar {
-    display: none;
+.dropdown-content li>span {
+    color: #000 !important;
 }
 
+.left
+{
+    padding: .7rem;
+}
+
+#beaconCreate
+{
+    position: absolute;
+    top: 90px;
+    right: 50px;
+}
+
+#catbtn
+{
+    margin-left: 10.5px;
+}
+
+#beaconSubmit
+{
+    top: 20px;
+}
+
+/* Beacons Section */
 .beacons {
     margin-top: 1rem;
 }
 
+/* Voting Sub-section */
 #bar
 {
     padding-bottom: 20px;
@@ -121,6 +137,7 @@ nav ul a.active {
     margin-right: 5px;
 }
 
+/* Misc. */
 #map {
     height: 100%;
     width: 100%;
@@ -142,22 +159,16 @@ nav ul a.active {
     }
 }
 
-
 .parallax-container {
       min-height: 380px;
       line-height: 0;
       height: auto;
       color: rgba(255,255,255,.9);
     }
-      .parallax-container .section {
-        width: 100%;
-      }
+  .parallax-container .section {
+    width: 100%;
+  }
 
 input.select-dropdown {
     margin-bottom: 0px !important;
 }
-
-#explore-row {
-    margin-bottom: 0px !important;
-}
-    

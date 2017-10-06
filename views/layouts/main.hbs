@@ -21,7 +21,7 @@
 
 	<nav role="navigation">
 		<div class="nav-wrapper container">
-			<a id="logo-container" href="/" class="brand-logo">Rally or Riot</a>
+			<a id="logo-container" href="/" class="brand-logo"><img src="/assets/img/logo.png" alt="Rally or Riot"/></a>
 
 			<ul class="right hide-on-med-and-down">
 				{{#if user}}
@@ -30,7 +30,7 @@
 				</li>
 				<li style="padding:0 10px 0 10px">|</li>
 				<li>
-					<a href="profile/{{user.username}}">
+					<a href="/profile/{{user.username}}">
 						<i class="fa fa-user-circle" aria-hidden="true"></i>
 						{{user.username}}
 					</a>
@@ -72,17 +72,18 @@
 				<div class="col l4 offset-l2 s12">
 					<h5 class="white-text">Connect With Us</h5>
 					<ul>
-						<li><a class="grey-text text-lighten-3" href="#!">Facebook</a></li>
-						<li><a class="grey-text text-lighten-3" href="#!">Twitter</a></li>
-						<li><a class="grey-text text-lighten-3" href="#!">Instagram</a></li>
-						<li><a class="grey-text text-lighten-3" href="#!">Snapchat</a></li>
+						<li><a class="grey-text text-lighten-3" href="https://github.com/daytonmills">Dayton Mills</a></li>
+						<li><a class="grey-text text-lighten-3" href="https://github.com/jeanellesebastian">Jeanelle Sebastion</a></li>
+						<li><a class="grey-text text-lighten-3" href="https://github.com/jeffpalin">Jeff Palin</a></li>
+						<li><a class="grey-text text-lighten-3" href="https://github.com/99darwin">Nick Saponaro</a></li>
+						<li><a class="grey-text text-lighten-3" href="https://github.com/RowinnDinosaur">Rowinn Dionisio</a></li>
 					</ul>
 				</div>
 			</div>
 		</div>
 		<div class="footer-copyright">
 			<div class="container">
-				© 2017 Copyright Text {{!-- <a class="grey-text text-lighten-4 right" href="#!">More Links</a> --}}
+				© 2017 Rally or Riot {{!-- <a class="grey-text text-lighten-4 right" href="#!">More Links</a> --}}
 			</div>
 		</div>
 	</footer>
@@ -102,12 +103,12 @@
 		var urlLocation = window.location.pathname;
 		var navBar = $(".right.hide-on-med-and-down li a");
 		var navLength = navBar.length;
-		
+
 		// loop through all the nav elements
 		for(var i = 0; i < navLength; i++) {
 			// getting the href for each a tag
 			var pathName = $(navBar[i]).attr("href");
-			
+
 			// if the href value is the same as the urlLocation
 			if(pathName === urlLocation) {
 				// add a class to that element
@@ -124,7 +125,7 @@
 	</script>
 
 	<script>
-		
+
 		(function ($) {
 			$(function () {
 				$('.button-collapse').sideNav();
