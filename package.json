@@ -26,7 +26,7 @@
     "geolocation": "^0.2.0",
     "google-geolocation": "^1.0.1",
     "method-override": "^2.3.10",
-    "moment": "^2.18.1",
+    "moment": "^2.19.3",
     "mysql2": "^1.4.2",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
